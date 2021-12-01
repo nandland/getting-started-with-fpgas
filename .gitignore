@@ -1,0 +1,5 @@
+*.v~
+*.sv~
+*.vhd~
+chapter03/And_Gate_Project/
+chapter04/LED_Toggle_Project/
