@@ -2,5 +2,24 @@
 *.sv~
 *.vhd~
 *#
-chapter03/And_Gate_Project/
-chapter04/LED_Toggle_Project/
+
+# iCEcube2 Projects
+# PCF and SDC files need to travel with each project. 
+# Otherwise iCEcube2 will hardcode the path to the constraint file.
+# Want to keep compatibility across machines and project structures.
+chapter03/And_Gate_Project/*
+!chapter03/And_Gate_Project/And_Gate_Project_sbt.project
+!chapter03/And_Gate_Project/And_Gate_Project_syn.prj
+!chapter03/And_Gate_Project/Go_Board_Pin_Constraints.pcf
+
+chapter04/LED_Toggle_Project/*
+!chapter04/LED_Toggle_Project/LED_Toggle_Project_sbt.project
+!chapter04/LED_Toggle_Project/LED_Toggle_Project_syn.prj
+!chapter04/LED_Toggle_Project/Go_Board_Pin_Constraints.pcf
+!chapter04/LED_Toggle_Project/Go_Board_Clock_Constraint.sdc
+
+chapter05/Debounce_Project/*
+!chapter05/Debounce_Project/Debounce_Project_sbt.project
+!chapter05/Debounce_Project/Debounce_Project_syn.prj
+!chapter05/Debounce_Project/Go_Board_Pin_Constraints.pcf
+!chapter05/Debounce_Project/Go_Board_Clock_Constraint.sdc

@@ -20,7 +20,7 @@ begin
   process (i_Clk) is
   begin
     if rising_edge(i_Clk) then
-      r_Switch_1 <= i_Switch_1;         -- Creates a Register
+      r_Switch_1 <= i_Switch_1;       -- Creates a Register
       
       -- This conditional expression looks for a falling edge on i_Switch_1.
       -- Here, the current value (i_Switch_1) is low, but the previous value
