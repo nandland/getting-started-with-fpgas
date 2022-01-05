@@ -4,6 +4,7 @@
 
 add_file -verilog -lib work "../Debounce_Filter.v" 
 add_file -verilog -lib work "../Debounce_Project_Top.v" 
+add_file -verilog -lib work "../../chapter04/LED_Toggle_Project.v" 
 add_file -constraint -lib work "../../Go_Board_Clock_Constraint.sdc"
 #implementation: "Debounce_Project_Implmnt"
 impl -add Debounce_Project_Implmnt -type fpga

@@ -3,7 +3,7 @@
 #project files
 
 add_file -verilog -lib work "../LED_Toggle_Project.v" 
-add_file -constraint -lib work "Go_Board_Clock_Constraint.sdc"
+add_file -constraint -lib work "../../Go_Board_Clock_Constraint.sdc"
 #implementation: "LED_Toggle_Project_Implmnt"
 impl -add LED_Toggle_Project_Implmnt -type fpga
 
