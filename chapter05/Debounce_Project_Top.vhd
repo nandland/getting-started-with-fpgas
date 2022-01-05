@@ -20,6 +20,8 @@ begin
 
   -- Instantiate Debounce Filter
   Debounce_Inst : entity work.Debounce_Filter
+    generic map(
+      DEBOUNCE_LIMIT => 250000)
     port map (
       i_Clk       => i_Clk,
       i_Bouncy    => i_Switch_1,

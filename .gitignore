@@ -12,6 +12,9 @@ chapter04/LED_Toggle_Project/*
 !chapter04/LED_Toggle_Project/LED_Toggle_Project_sbt.project
 !chapter04/LED_Toggle_Project/LED_Toggle_Project_syn.prj
 
-chapter05/Debounce_Project/*
-!chapter05/Debounce_Project/Debounce_Project_sbt.project
-!chapter05/Debounce_Project/Debounce_Project_syn.prj
+chapter05/Debounce_Project_Verilog/*
+!chapter05/Debounce_Project_Verilog/Debounce_Project_Verilog_sbt.project
+!chapter05/Debounce_Project_Verilog/Debounce_Project_Verilog_syn.prj
+chapter05/Debounce_Project_VHDL/*
+!chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_sbt.project
+!chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_syn.prj

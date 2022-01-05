@@ -1,13 +1,13 @@
 #-- Synopsys, Inc.
-#-- Project file C:\Users\Russell\Desktop\fpga-book\chapter05\Debounce_Project\Debounce_Project_syn.prj
+#-- Project file C:\Users\Russell\Desktop\fpga-book\chapter05\Debounce_Project_VHDL\Debounce_Project_VHDL_syn.prj
 #project files
 
-add_file -verilog -lib work "../Debounce_Filter.v" 
-add_file -verilog -lib work "../Debounce_Project_Top.v" 
-add_file -verilog -lib work "../../chapter04/LED_Toggle_Project.v" 
+add_file -vhdl -lib work "../Debounce_Filter.vhd" 
+add_file -vhdl -lib work "../Debounce_Project_Top.vhd" 
+add_file -vhdl -lib work "../../chapter04/LED_Toggle_Project.vhd" 
 add_file -constraint -lib work "../../Go_Board_Clock_Constraint.sdc"
-#implementation: "Debounce_Project_Implmnt"
-impl -add Debounce_Project_Implmnt -type fpga
+#implementation: "Debounce_Project_VHDL_Implmnt"
+impl -add Debounce_Project_VHDL_Implmnt -type fpga
 
 #implementation attributes
 set_option -vlog_std v2001
@@ -53,7 +53,7 @@ set_option -write_apr_constraint 1
 
 #set result format/file last
 project -result_format "edif"
-project -result_file ./Debounce_Project_Implmnt/Debounce_Project.edf
-project -log_file "./Debounce_Project_Implmnt/Debounce_Project.srr"
-impl -active Debounce_Project_Implmnt
+project -result_file ./Debounce_Project_VHDL_Implmnt/Debounce_Project_VHDL.edf
+project -log_file "./Debounce_Project_VHDL_Implmnt/Debounce_Project_VHDL.srr"
+impl -active Debounce_Project_VHDL_Implmnt
 project -run synthesis -clean

@@ -1,38 +1,43 @@
+-- This module is used to debounce any switch or button coming into the FPGA.
+-- Does not allow the output to change unless the input i_Bouncy is
+-- steady for enough time (not toggling).
+--
+-- Generics: 
+-- DEBOUNCE_LIMIT - Determines number of clock cycles that input must be stable
+--                  before output is updated. 
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
  
-entity Debounce_Switch is
+entity Debounce_Filter is
+  generic (DEBOUNCE_LIMIT : integer := 250000);
   port (
-    i_Clk    : in  std_logic;
-    i_Switch : in  std_logic;
-    o_Switch : out std_logic
+    i_Clk       : in  std_logic;
+    i_Bouncy    : in  std_logic;
+    o_Debounced : out std_logic
     );
-end entity Debounce_Switch;
+end entity Debounce_Filter;
  
-architecture RTL of Debounce_Switch is
- 
-  -- Set for 250,000 clock ticks of 25 MHz clock (10 ms)
-  -- TODO: TURN THIS INTO A GENERIC
-  constant c_DEBOUNCE_LIMIT : integer := 250000;
- 
-  signal r_Count : integer range 0 to c_DEBOUNCE_LIMIT := 0;
+architecture RTL of Debounce_Filter is
+  
+  signal r_Count : integer range 0 to DEBOUNCE_LIMIT := 0;
   signal r_State : std_logic := '0';
  
 begin
  
-  p_Debounce : process (i_Clk) is
+  process (i_Clk) is
   begin
     if rising_edge(i_Clk) then
  
       -- Switch input is different than internal switch value, so an input is
-      -- changing.  Increase counter until it is stable for c_DEBOUNCE_LIMIT.
-      if (i_Switch /= r_State and r_Count < c_DEBOUNCE_LIMIT) then
+      -- changing.  Increase counter until it is stable for DEBOUNCE_LIMIT.
+      if (i_Bouncy /= r_State and r_Count < DEBOUNCE_LIMIT) then
         r_Count <= r_Count + 1;
  
       -- End of counter reached, switch is stable, register it, reset counter
-      elsif r_Count = c_DEBOUNCE_LIMIT then
-        r_State <= i_Switch;
+      elsif r_Count = DEBOUNCE_LIMIT then
+        r_State <= i_Bouncy;
         r_Count <= 0;
  
       -- Switches are the same state, reset the counter
@@ -41,9 +46,9 @@ begin
  
       end if;
     end if;
-  end process p_Debounce;
+  end process;
  
   -- Assign internal register to output (debounced!)
-  o_Switch <= r_State;
+  o_Debounced <= r_State;
  
 end architecture RTL;

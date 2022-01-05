@@ -1,5 +1,6 @@
 // Top level file for adding a Debounce filter to LED toggling
 // Instantiates the Debounce Filter and the LED toggle modules
+// Sets up a 10 ms debounce filter (input must be stable for 10 ms)
 
 module Debounce_Project_Top
   (input  i_Clk,
@@ -9,7 +10,7 @@ module Debounce_Project_Top
   wire w_Debounced_Switch;
    
   // Instantiate Debounce Filter
-  Debounce_Filter Debounce_Inst
+  Debounce_Filter #(.DEBOUNCE_LIMIT(250000)) Debounce_Inst
   (.i_Clk(i_Clk), 
    .i_Bouncy(i_Switch_1),
    .o_Debounced(w_Debounced_Switch));

@@ -1,15 +1,15 @@
-[Debounce_Project_Implmnt]
+[Debounce_Project_Verilog_Implmnt]
 DeviceFamily=iCE40
 Device=HX1K
 DevicePackage=VQ100
 DevicePower=
-NetlistFile=Debounce_Project_Implmnt/Debounce_Project.edf
+NetlistFile=Debounce_Project_Verilog_Implmnt/Debounce_Project_Verilog.edf
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=Debounce_Project_Implmnt/sbt/netlist/oadb-Debounce_Project_Top
+DesignLib=Debounce_Project_Verilog_Implmnt/sbt/netlist/oadb-Debounce_Project_Top
 DesignView=_rt
 DesignCell=Debounce_Project_Top
-SynthesisSDCFile=Debounce_Project_Implmnt/Debounce_Project.scf
+SynthesisSDCFile=Debounce_Project_Verilog_Implmnt/Debounce_Project_Verilog.scf
 UserPinConstraintFile=
 UserSDCFile=
 PhysicalConstraintFile=../../Go_Board_Pin_Constraints.pcf
@@ -29,13 +29,13 @@ TimingPathNumberStick=0
 [Project]
 ProjectVersion=2.0
 Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Build Date: Dec 8 2014 15:21:57
-ProjectName=Debounce_Project
+ProjectName=Debounce_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../Debounce_Filter.v=work,../Debounce_Project_Top.v=work,../../chapter04/LED_Toggle_Project.v=work
+ProjectVFiles=../Debounce_Filter.v,../Debounce_Project_Top.v,../../chapter04/LED_Toggle_Project.v
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
-CurImplementation=Debounce_Project_Implmnt
-Implementations=Debounce_Project_Implmnt
+CurImplementation=Debounce_Project_Verilog_Implmnt
+Implementations=Debounce_Project_Verilog_Implmnt
 StartFromSynthesis=yes
 IPGeneration=false
 
