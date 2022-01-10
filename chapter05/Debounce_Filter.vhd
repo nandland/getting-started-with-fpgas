@@ -32,11 +32,11 @@ begin
  
       -- Switch input is different than internal switch value, so an input is
       -- changing.  Increase counter until it is stable for DEBOUNCE_LIMIT.
-      if (i_Bouncy /= r_State and r_Count < DEBOUNCE_LIMIT) then
+      if (i_Bouncy /= r_State and r_Count < DEBOUNCE_LIMIT-1) then
         r_Count <= r_Count + 1;
  
       -- End of counter reached, switch is stable, register it, reset counter
-      elsif r_Count = DEBOUNCE_LIMIT then
+      elsif r_Count = DEBOUNCE_LIMIT-1 then
         r_State <= i_Bouncy;
         r_Count <= 0;
  

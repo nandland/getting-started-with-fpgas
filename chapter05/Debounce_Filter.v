@@ -18,13 +18,13 @@ module Debounce_Filter #(parameter DEBOUNCE_LIMIT = 20) (
   begin
     // Bouncy input is different than internal state value, so an input is
     // changing.  Increase the counter until it is stable for enough time.  
-    if (i_Bouncy !== o_Debounced && r_Count < DEBOUNCE_LIMIT)
+    if (i_Bouncy !== o_Debounced && r_Count < DEBOUNCE_LIMIT-1)
     begin
       r_Count <= r_Count + 1;
     end
     
     // End of counter reached, switch is stable, register it, reset counter
-    else if (r_Count == DEBOUNCE_LIMIT)
+    else if (r_Count == DEBOUNCE_LIMIT-1)
     begin
       o_Debounced <= i_Bouncy;
       r_Count <= 0;
