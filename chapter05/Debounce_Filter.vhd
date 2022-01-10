@@ -11,7 +11,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
  
 entity Debounce_Filter is
-  generic (DEBOUNCE_LIMIT : integer := 250000);
+  generic (DEBOUNCE_LIMIT : integer := 20);
   port (
     i_Clk       : in  std_logic;
     i_Bouncy    : in  std_logic;

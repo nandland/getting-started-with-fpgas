@@ -1,11 +1,10 @@
 #-- Synopsys, Inc.
-#-- Project file C:\Users\Russell\Desktop\fpga-book\chapter03\LED_Toggle_Project\LED_Toggle_Project_syn.prj
+#-- Project file C:\Users\Russell\Desktop\fpga-book\chapter03\And_Gate_Project_Verilog\And_Gate_Project_Verilog_syn.prj
 #project files
+add_file -verilog -lib work "../And_Gate_Project.v"
 
-add_file -verilog -lib work "../LED_Toggle_Project.v" 
-add_file -constraint -lib work "../../Go_Board_Clock_Constraint.sdc"
-#implementation: "LED_Toggle_Project_Implmnt"
-impl -add LED_Toggle_Project_Implmnt -type fpga
+#implementation: "And_Gate_Project_Verilog_Implmnt"
+impl -add And_Gate_Project_Verilog_Implmnt -type fpga
 
 #implementation attributes
 set_option -vlog_std v2001
@@ -51,7 +50,7 @@ set_option -write_apr_constraint 1
 
 #set result format/file last
 project -result_format "edif"
-project -result_file ./LED_Toggle_Project_Implmnt/LED_Toggle_Project.edf
-project -log_file "./LED_Toggle_Project_Implmnt/LED_Toggle_Project.srr"
-impl -active LED_Toggle_Project_Implmnt
+project -result_file ./And_Gate_Project_Verilog_Implmnt/And_Gate_Project_Verilog.edf
+project -log_file "./And_Gate_Project_Verilog_Implmnt/And_Gate_Project_Verilog.srr"
+impl -active "And_Gate_Project_Verilog_Implmnt"
 project -run synthesis -clean

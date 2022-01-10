@@ -1,15 +1,15 @@
-[And_Gate_Project_Implmnt]
+[LED_Toggle_Project_Verilog_Implmnt]
 DeviceFamily=iCE40
 Device=HX1K
 DevicePackage=VQ100
 DevicePower=
-NetlistFile=And_Gate_Project_Implmnt/And_Gate_Project.edf
+NetlistFile=LED_Toggle_Project_Verilog_Implmnt/LED_Toggle_Project_Verilog.edf
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=
-DesignView=
-DesignCell=
-SynthesisSDCFile=And_Gate_Project_Implmnt/And_Gate_Project.scf
+DesignLib=LED_Toggle_Project_Verilog_Implmnt/sbt/netlist/oadb-LED_Toggle_Project
+DesignView=_rt
+DesignCell=LED_Toggle_Project
+SynthesisSDCFile=LED_Toggle_Project_Verilog_Implmnt/LED_Toggle_Project_Verilog.scf
 UserPinConstraintFile=
 UserSDCFile=
 PhysicalConstraintFile=../../Go_Board_Pin_Constraints.pcf
@@ -29,13 +29,13 @@ TimingPathNumberStick=0
 [Project]
 ProjectVersion=2.0
 Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Build Date: Dec 8 2014 15:21:57
-ProjectName=And_Gate_Project
+ProjectName=LED_Toggle_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../And_Gate_Project.vhd=work
-ProjectCFiles=
-CurImplementation=And_Gate_Project_Implmnt
-Implementations=And_Gate_Project_Implmnt
+ProjectVFiles=../LED_Toggle_Project.v=work
+ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
+CurImplementation=LED_Toggle_Project_Verilog_Implmnt
+Implementations=LED_Toggle_Project_Verilog_Implmnt
 StartFromSynthesis=yes
 IPGeneration=false
 
