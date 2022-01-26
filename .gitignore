@@ -24,3 +24,9 @@ chapter05/Debounce_Project_Verilog/*
 chapter05/Debounce_Project_VHDL/*
 !chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_sbt.project
 !chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_syn.prj
+
+chapter06/Mux/Mux_Project_VHDL/*
+!chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_sbt.project
+!chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_syn.prj
+!chapter06/Mux/Mux_Project_VHDL/Mux_Project_Top.vhd
+
