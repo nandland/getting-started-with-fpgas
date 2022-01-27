@@ -1,12 +1,13 @@
 #-- Synopsys, Inc.
-#-- Project file C:\Users\Russell\Desktop\fpga-book\chapter06\\Mux_Project_VHDL\Mux_Project_VHDL_syn.prj
+#-- Project file C:\Users\Russell\Desktop\fpga-book\chapter06\Mux\Mux_Project_Verilog\Mux_Project_Verilog_syn.prj
 #project files
 
-add_file -vhdl -lib work "../Mux_4_To_1.vhd" 
-add_file -vhdl -lib work "Count_And_Toggle.vhd" 
-add_file -vhdl -lib work "Mux_Project_Top.vhd" 
-#implementation: "Mux_Project_VHDL_Implmnt"
-impl -add Mux_Project_VHDL_Implmnt -type fpga
+add_file -verilog -lib work "../Mux_4_To_1_Ternary.v" 
+add_file -verilog -lib work "Count_And_Toggle.v" 
+add_file -verilog -lib work "Mux_Project_Top.v" 
+add_file -constraint -lib work "../../../Go_Board_Clock_Constraint.sdc"
+#implementation: "Mux_Project_Verilog_Implmnt"
+impl -add Mux_Project_Verilog_Implmnt -type fpga
 
 #implementation attributes
 set_option -vlog_std v2001
@@ -52,7 +53,7 @@ set_option -write_apr_constraint 1
 
 #set result format/file last
 project -result_format "edif"
-project -result_file ./Mux_Project_VHDL_Implmnt/Mux_Project_VHDL.edf
-project -log_file "./Mux_Project_VHDL_Implmnt/Mux_Project_VHDL.srr"
-impl -active Mux_Project_VHDL_Implmnt
+project -result_file ./Mux_Project_Verilog_Implmnt/Mux_Project_Verilog.edf
+project -log_file "./Mux_Project_Verilog_Implmnt/Mux_Project_Verilog.srr"
+impl -active Mux_Project_Verilog_Implmnt
 project -run synthesis -clean

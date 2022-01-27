@@ -4,6 +4,7 @@
 *#
 
 # iCEcube2 Projects
+# NOTE TO SELF: Might be able to remove _syn.prj
 chapter03/And_Gate_Project_Verilog/*
 !chapter03/And_Gate_Project_Verilog/And_Gate_Project_Verilog_sbt.project
 !chapter03/And_Gate_Project_Verilog/And_Gate_Project_Verilog_syn.prj
@@ -29,4 +30,11 @@ chapter06/Mux/Mux_Project_VHDL/*
 !chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_sbt.project
 !chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_syn.prj
 !chapter06/Mux/Mux_Project_VHDL/Mux_Project_Top.vhd
+!chapter06/Mux/Mux_Project_VHDL/Count_And_Toggle.vhd
+
+chapter06/Mux/Mux_Project_Verilog/*
+!chapter06/Mux/Mux_Project_Verilog/Mux_Project_Verilog_sbt.project
+!chapter06/Mux/Mux_Project_Verilog/Mux_Project_Verilog_syn.prj
+!chapter06/Mux/Mux_Project_Verilog/Mux_Project_Top.v
+!chapter06/Mux/Mux_Project_Verilog/Count_And_Toggle.v
 

@@ -1,18 +1,18 @@
-[Mux_Project_VHDL_Implmnt]
+[Mux_Project_Verilog_Implmnt]
 DeviceFamily=iCE40
 Device=HX1K
 DevicePackage=VQ100
 DevicePower=
-NetlistFile=Mux_Project_VHDL_Implmnt/Mux_Project_VHDL.edf
+NetlistFile=
 AdditionalEDIFFile=
 IPEDIFFile=
 DesignLib=
 DesignView=
 DesignCell=
-SynthesisSDCFile=Mux_Project_VHDL_Implmnt/Mux_Project_VHDL.scf
+SynthesisSDCFile=
 UserPinConstraintFile=
 UserSDCFile=
-PhysicalConstraintFile=
+PhysicalConstraintFile=../../../Go_Board_Pin_Constraints.pcf
 BackendImplPathName=
 Devicevoltage=1.14
 DevicevoltagePerformance=+/-5%(datasheet default)
@@ -29,13 +29,13 @@ TimingPathNumberStick=0
 [Project]
 ProjectVersion=2.0
 Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Build Date: Dec 8 2014 15:21:57
-ProjectName=Mux_Project_VHDL
+ProjectName=Mux_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../Mux_4_To_1.vhd=work,Count_And_Toggle.vhd=work,Mux_Project_Top.vhd=work
-ProjectCFiles=
-CurImplementation=Mux_Project_VHDL_Implmnt
-Implementations=Mux_Project_VHDL_Implmnt
+ProjectVFiles=../Mux_4_To_1_Ternary.v=work,Count_And_Toggle.v,Mux_Project_Top.v
+ProjectCFiles=../../../Go_Board_Clock_Constraint.sdc
+CurImplementation=Mux_Project_Verilog_Implmnt
+Implementations=Mux_Project_Verilog_Implmnt
 StartFromSynthesis=yes
 IPGeneration=false
 
