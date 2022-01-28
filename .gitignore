@@ -4,37 +4,34 @@
 *#
 
 # iCEcube2 Projects
-# NOTE TO SELF: Might be able to remove _syn.prj
 chapter03/And_Gate_Project_Verilog/*
 !chapter03/And_Gate_Project_Verilog/And_Gate_Project_Verilog_sbt.project
-!chapter03/And_Gate_Project_Verilog/And_Gate_Project_Verilog_syn.prj
+
 chapter03/And_Gate_Project_VHDL/*
 !chapter03/And_Gate_Project_VHDL/And_Gate_Project_VHDL_sbt.project
-!chapter03/And_Gate_Project_VHDL/And_Gate_Project_VHDL_syn.prj
 
 chapter04/LED_Toggle_Project_Verilog/*
 !chapter04/LED_Toggle_Project_Verilog/LED_Toggle_Project_Verilog_sbt.project
-!chapter04/LED_Toggle_Project_Verilog/LED_Toggle_Project_Verilog_syn.prj
+
 chapter04/LED_Toggle_Project_VHDL/*
 !chapter04/LED_Toggle_Project_VHDL/LED_Toggle_Project_VHDL_sbt.project
-!chapter04/LED_Toggle_Project_VHDL/LED_Toggle_Project_VHDL_syn.prj
 
 chapter05/Debounce_Project_Verilog/*
 !chapter05/Debounce_Project_Verilog/Debounce_Project_Verilog_sbt.project
-!chapter05/Debounce_Project_Verilog/Debounce_Project_Verilog_syn.prj
+!chapter05/Debounce_Project_Verilog/Debounce_Project_Verilog_Implmnt/sbt/outputs/bitmap/Debounce_Project_Top_bitmap.bin
+
 chapter05/Debounce_Project_VHDL/*
 !chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_sbt.project
-!chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_syn.prj
+!chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_Implmnt/sbt/outputs/bitmap/Debounce_Project_Top_bitmap.bin
 
 chapter06/Mux/Mux_Project_VHDL/*
 !chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_sbt.project
-!chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_syn.prj
 !chapter06/Mux/Mux_Project_VHDL/Mux_Project_Top.vhd
 !chapter06/Mux/Mux_Project_VHDL/Count_And_Toggle.vhd
+!chapter06/Mux/Mux_Project_VHDL/Mux_Project_VHDL_Implmnt/sbt/outputs/bitmap/Mux_Project_Top_bitmap.bin
 
 chapter06/Mux/Mux_Project_Verilog/*
 !chapter06/Mux/Mux_Project_Verilog/Mux_Project_Verilog_sbt.project
-!chapter06/Mux/Mux_Project_Verilog/Mux_Project_Verilog_syn.prj
 !chapter06/Mux/Mux_Project_Verilog/Mux_Project_Top.v
 !chapter06/Mux/Mux_Project_Verilog/Count_And_Toggle.v
-
+!chapter06/Mux/Mux_Project_Verilog/Mux_Project_Verilog_Implmnt/sbt/outputs/bitmap/Mux_Project_Top_bitmap.bin

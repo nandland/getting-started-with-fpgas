@@ -5,6 +5,7 @@
 add_file -vhdl -lib work "../Mux_4_To_1.vhd" 
 add_file -vhdl -lib work "Count_And_Toggle.vhd" 
 add_file -vhdl -lib work "Mux_Project_Top.vhd" 
+add_file -constraint -lib work "../../../Go_Board_Clock_Constraint.sdc"
 #implementation: "Mux_Project_VHDL_Implmnt"
 impl -add Mux_Project_VHDL_Implmnt -type fpga
 

@@ -5,14 +5,12 @@
 module Count_And_Toggle #(COUNT_LIMIT = 10)
    (input i_Clk,
     input i_Enable,
-    output o_Toggle);
+    output reg o_Toggle);
     
   // Create the signal to do the actual counting
   // Subtract 1, since counter starts at 0
   reg [$clog2(COUNT_LIMIT-1):0] r_Counter;
 
-begin
- 
   // This always block toggles the output at desired frequency   
   always @(posedge i_Clk) 
   begin
@@ -29,7 +27,5 @@ begin
     else
       o_Toggle <= 1'b0;
   end
-  
-end
 
 endmodule

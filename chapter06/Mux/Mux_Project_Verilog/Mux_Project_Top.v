@@ -8,8 +8,6 @@ module Mux_Project_Top
     input i_Switch_1,
     input i_Switch_2,
     output o_LED_1);
-
-begin
     
     Count_And_Toggle #(.COUNT_LIMIT(25000000/2)) Toggle_1Hz 
     (.i_Clk(i_Clk),
@@ -38,8 +36,6 @@ begin
      .in4(w_Toggle_10Hz),
      .sel1(i_Switch_1),
      .sel2(i_Switch_2),
-     .out1(o_LED_1));
-
-end
+     .out(o_LED_1));
 
 endmodule

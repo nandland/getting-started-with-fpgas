@@ -6,13 +6,13 @@ DevicePower=
 NetlistFile=
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=
+DesignLib=Mux_Project_Verilog_Implmnt/sbt/netlist/oadb-Mux_Project_Top
 DesignView=
-DesignCell=
+DesignCell=Mux_Project_Top
 SynthesisSDCFile=
 UserPinConstraintFile=
 UserSDCFile=
-PhysicalConstraintFile=../../../Go_Board_Pin_Constraints.pcf
+PhysicalConstraintFile=
 BackendImplPathName=
 Devicevoltage=1.14
 DevicevoltagePerformance=+/-5%(datasheet default)
@@ -32,7 +32,7 @@ Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Bui
 ProjectName=Mux_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../Mux_4_To_1_Ternary.v=work,Count_And_Toggle.v,Mux_Project_Top.v
+ProjectVFiles=../Mux_4_To_1_Ternary.v=work,Count_And_Toggle.v=work,Mux_Project_Top.v=work
 ProjectCFiles=../../../Go_Board_Clock_Constraint.sdc
 CurImplementation=Mux_Project_Verilog_Implmnt
 Implementations=Mux_Project_Verilog_Implmnt
