@@ -32,7 +32,7 @@ Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Bui
 ProjectName=Debounce_Project_VHDL
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../Debounce_Filter.vhd,../Debounce_Project_Top.vhd,../../chapter04/LED_Toggle_Project.vhd
+ProjectVFiles=../Debounce_Filter.vhd=work,../Debounce_Project_Top.vhd=work,../../chapter04/LED_Toggle_Project.vhd=work
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
 CurImplementation=Debounce_Project_VHDL_Implmnt
 Implementations=Debounce_Project_VHDL_Implmnt

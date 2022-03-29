@@ -5,7 +5,7 @@
 module Debounce_Project_Top
   (input  i_Clk,
    input  i_Switch_1,
-   output o_Debounced);
+   output o_LED_1);
 
   wire w_Debounced_Switch;
    
