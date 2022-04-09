@@ -35,3 +35,6 @@ chapter06/Mux/Mux_Project_Verilog/*
 !chapter06/Mux/Mux_Project_Verilog/Mux_Project_Top.v
 !chapter06/Mux/Mux_Project_Verilog/Count_And_Toggle.v
 !chapter06/Mux/Mux_Project_Verilog/Mux_Project_Verilog_Implmnt/sbt/outputs/bitmap/Mux_Project_Top_bitmap.bin
+
+chapter07/timing_error_project/*
+!chapter07/timing_error_project/timing_error_sbt.project
