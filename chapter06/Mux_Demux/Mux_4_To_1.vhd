@@ -1,3 +1,6 @@
+-- Implements a 4-1 Multiplexer.
+-- In reality, it is unlikely you would put a mux in a dedicated module.
+
 library ieee;
 use ieee.std_logic_1164.all;
  

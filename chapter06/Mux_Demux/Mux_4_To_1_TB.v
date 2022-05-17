@@ -8,8 +8,8 @@ Mux_4_To_1 UUT (.i_Data0(r_Data0),
                 .i_Data1(r_Data1), 
                 .i_Data2(r_Data2), 
                 .i_Data3(r_Data3),
-                .i_Sel1(r_Sel1), 
                 .i_Sel0(r_Sel0), 
+                .i_Sel1(r_Sel1), 
                 .o_Data(w_Out));
 
 // Takes input integer and drives select inputs
