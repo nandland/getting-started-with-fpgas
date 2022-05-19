@@ -1,18 +1,18 @@
-[Mux_Project_Verilog_Implmnt]
+[Demux_LFSR_Project_Verilog_Implmnt]
 DeviceFamily=iCE40
 Device=HX1K
 DevicePackage=VQ100
 DevicePower=
-NetlistFile=Mux_Project_Verilog_Implmnt/Mux_Project_Verilog.edf
+NetlistFile=Demux_LFSR_Project_Verilog_Implmnt/Demux_LFSR_Project_Verilog.edf
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=Mux_Project_Verilog_Implmnt/sbt/netlist/oadb-Demux_Project_Top
+DesignLib=Demux_LFSR_Project_Verilog_Implmnt/sbt/netlist/oadb-Demux_Project_Top
 DesignView=_rt
 DesignCell=Demux_Project_Top
-SynthesisSDCFile=Mux_Project_Verilog_Implmnt/Mux_Project_Verilog.scf
+SynthesisSDCFile=Demux_LFSR_Project_Verilog_Implmnt/Demux_LFSR_Project_Verilog.scf
 UserPinConstraintFile=
 UserSDCFile=
-PhysicalConstraintFile=../../Go_Board_Pin_Constraints.pcf
+PhysicalConstraintFile=C:/Users/Russell/Desktop/repos/fpga-book/Go_Board_Pin_Constraints.pcf
 BackendImplPathName=
 Devicevoltage=1.14
 DevicevoltagePerformance=+/-5%(datasheet default)
@@ -29,13 +29,13 @@ TimingPathNumberStick=0
 [Project]
 ProjectVersion=2.0
 Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Build Date: Dec 8 2014 15:21:57
-ProjectName=Mux_Project_Verilog
+ProjectName=Demux_LFSR_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=Count_And_Toggle.v=work,Demux_LFSR_Project_Top.v,../lfsr/Verilog/source/LFSR.v,../Mux_Demux/Demux_1_To_4.v
-ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
-CurImplementation=Mux_Project_Verilog_Implmnt
-Implementations=Mux_Project_Verilog_Implmnt
+ProjectVFiles=../lfsr/Verilog/source/LFSR.v,../Mux_Demux/Demux_1_To_4.v,../Demux_LFSR_Project_Verilog/Count_And_Toggle.v,../Demux_LFSR_Project_Verilog/Demux_LFSR_Project_Top.v
+ProjectCFiles=C:/Users/Russell/Desktop/repos/fpga-book/Go_Board_Clock_Constraint.sdc
+CurImplementation=Demux_LFSR_Project_Verilog_Implmnt
+Implementations=Demux_LFSR_Project_Verilog_Implmnt
 StartFromSynthesis=yes
 IPGeneration=false
 
