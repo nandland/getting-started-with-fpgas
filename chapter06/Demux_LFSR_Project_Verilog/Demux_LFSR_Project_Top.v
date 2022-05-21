@@ -46,7 +46,7 @@ module Demux_Project_Top
          r_LFSR_Toggle <= !r_LFSR_Toggle;
    end
 
-   Count_And_Toggle #(.COUNT_LIMIT(4194303)) Toggle_Counter
+   Count_And_Toggle #(.COUNT_LIMIT(2**NUM_LFSR_BITS)) Toggle_Counter
     (.i_Clk(i_Clk),
      .i_Enable(1'b1),
      .o_Toggle(w_Counter_Toggle));
