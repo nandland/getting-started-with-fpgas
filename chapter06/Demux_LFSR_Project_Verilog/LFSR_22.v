@@ -1,3 +1,4 @@
+// 22-bit wide LFSR.
 module LFSR_22 (
   input         i_Clk,
   output [21:0] o_LFSR_Data,

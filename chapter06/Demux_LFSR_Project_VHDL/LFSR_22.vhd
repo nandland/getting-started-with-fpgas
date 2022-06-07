@@ -1,3 +1,4 @@
+-- 22 bit wide LFSR
 library IEEE;
 use IEEE.std_logic_1164.all;
 
@@ -22,9 +23,7 @@ begin
   end process;
 
 w_XNOR      <= r_LFSR(21) xnor r_LFSR(20);
-
 o_LFSR_Done <= '1' when (r_LFSR = "0000000000000000000000") else '0';
-
 o_LFSR_Data <= r_LFSR;
 
 end RTL;
