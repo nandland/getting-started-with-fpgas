@@ -6,9 +6,9 @@ DevicePower=
 NetlistFile=Demux_LFSR_Project_Verilog_Implmnt/Demux_LFSR_Project_Verilog.edf
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=Demux_LFSR_Project_Verilog_Implmnt/sbt/netlist/oadb-Demux_Project_Top
+DesignLib=Demux_LFSR_Project_Verilog_Implmnt/sbt/netlist/oadb-Demux_LFSR_Project_Top
 DesignView=_rt
-DesignCell=Demux_Project_Top
+DesignCell=Demux_LFSR_Project_Top
 SynthesisSDCFile=Demux_LFSR_Project_Verilog_Implmnt/Demux_LFSR_Project_Verilog.scf
 UserPinConstraintFile=
 UserSDCFile=
@@ -32,7 +32,7 @@ Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Bui
 ProjectName=Demux_LFSR_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../lfsr/Verilog/source/LFSR.v=work,../Mux_Demux/Demux_1_To_4.v=work,Count_And_Toggle.v=work,Demux_LFSR_Project_Top.v=work
+ProjectVFiles=../Mux_Demux/Demux_1_To_4.v=work,Count_And_Toggle.v=work,Demux_LFSR_Project_Top.v=work,LFSR_22.v=work
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
 CurImplementation=Demux_LFSR_Project_Verilog_Implmnt
 Implementations=Demux_LFSR_Project_Verilog_Implmnt

@@ -36,26 +36,21 @@ architecture RTL of Demux_LFSR_Project_Top is
   constant USE_LFSR : integer := 1;
    
   signal r_LFSR_Toggle : std_logic := '0';
-  signal w_Slow_Pulse : std_logic;
+  signal w_LFSR_Done : std_logic;
   signal w_LED_Toggle, w_Counter_Toggle : std_logic;
 
 begin
 
-  Toggle_LFSR : entity work.LFSR 
-  generic map (
-    NUM_BITS => NUM_LFSR_BITS)
+  LFSR_22 : entity work.LFSR_22
   port map (
     i_Clk       => i_Clk,
-    i_Enable    => '1',
-    i_Seed_DV   => '0',
-    i_Seed_Data => 0,
     o_LFSR_Data => open, -- unconnected
-    o_LFSR_Done => w_Slow_Pulse);
+    o_LFSR_Done => w_LFSR_Done);
 
   process (i_Clk) is 
   begin
     if rising_edge(i_Clk) then
-        if w_Slow_Pulse = '1' then
+        if w_LFSR_Done = '1' then
             r_LFSR_Toggle <= not r_LFSR_Toggle;
         end if;
     end if;

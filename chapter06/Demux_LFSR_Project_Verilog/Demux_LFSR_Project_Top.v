@@ -29,20 +29,17 @@ module Demux_LFSR_Project_Top
   localparam USE_LFSR = 1;
    
   reg r_LFSR_Toggle = 1'b0;
-  wire w_Slow_Pulse;
+  wire w_LFSR_Done;
   wire w_LED_Toggle, w_Counter_Toggle;
 
-  LFSR #(.NUM_BITS(NUM_LFSR_BITS)) Toggle_LFSR 
+  LFSR_22 LFSR_Inst
   (.i_Clk(i_Clk),
-   .i_Enable(1'b1),
-   .i_Seed_DV(1'b0),
-   .i_Seed_Data({NUM_LFSR_BITS{1'b0}}), // replcicator
    .o_LFSR_Data(), // unconnected
-   .o_LFSR_Done(w_Slow_Pulse));
+   .o_LFSR_Done(w_LFSR_Done));
 
   always @(posedge i_Clk)
   begin
-    if (w_Slow_Pulse)
+    if (w_LFSR_Done)
       r_LFSR_Toggle <= !r_LFSR_Toggle;
   end
 

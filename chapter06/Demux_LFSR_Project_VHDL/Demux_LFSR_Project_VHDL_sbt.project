@@ -32,7 +32,7 @@ Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Bui
 ProjectName=Demux_LFSR_Project_VHDL
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../lfsr/VHDL/source/LFSR.vhd,../Mux_Demux/Demux_1_To_4.vhd,Count_And_Toggle.vhd,Demux_LFSR_Project_Top.vhd
+ProjectVFiles=../Mux_Demux/Demux_1_To_4.vhd=work,Count_And_Toggle.vhd=work,Demux_LFSR_Project_Top.vhd=work,LFSR_22.vhd
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
 CurImplementation=Demux_LFSR_Project_VHDL_Implmnt
 Implementations=Demux_LFSR_Project_VHDL_Implmnt
