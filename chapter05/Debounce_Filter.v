@@ -7,18 +7,19 @@
 //                  before output is updated. 
 
 module Debounce_Filter #(parameter DEBOUNCE_LIMIT = 20) (
-  input i_Clk,
-  input i_Bouncy,
-  output reg o_Debounced);
+  input  i_Clk,
+  input  i_Bouncy,
+  output o_Debounced);
  
   // Will set the width of this counter based on the input parameter
-  reg [$clog2(DEBOUNCE_LIMIT)-1:0] r_Count;
- 
+  reg [$clog2(DEBOUNCE_LIMIT)-1:0] r_Count = 0;
+  reg r_State = 1'b0;
+  
   always @(posedge i_Clk)
   begin
     // Bouncy input is different than internal state value, so an input is
     // changing.  Increase the counter until it is stable for enough time.  
-    if (i_Bouncy !== o_Debounced && r_Count < DEBOUNCE_LIMIT-1)
+    if (i_Bouncy !== r_State && r_Count < DEBOUNCE_LIMIT-1)
     begin
       r_Count <= r_Count + 1;
     end
@@ -26,7 +27,7 @@ module Debounce_Filter #(parameter DEBOUNCE_LIMIT = 20) (
     // End of counter reached, switch is stable, register it, reset counter
     else if (r_Count == DEBOUNCE_LIMIT-1)
     begin
-      o_Debounced <= i_Bouncy;
+      r_State <= i_Bouncy;
       r_Count <= 0;
     end 
 
@@ -36,5 +37,8 @@ module Debounce_Filter #(parameter DEBOUNCE_LIMIT = 20) (
       r_Count <= 0;
     end
   end
+  
+  // Assign internal register to output (debounced!)
+  assign o_Debounced = r_State;
   
 endmodule

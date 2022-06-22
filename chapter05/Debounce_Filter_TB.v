@@ -14,17 +14,22 @@ module Debounce_Filter_TB ();
     $dumpfile("dump.vcd"); 
     $dumpvars;
     
-    repeat(8) @(posedge r_Clk);
+    repeat(3) @(posedge r_Clk);
+    
     r_Bouncy <= 1'b1; // toggle state of input pin
     
-    @(posedge r_Clk);
+    repeat(1) @(posedge r_Clk);
+    
     r_Bouncy <= 1'b0; // simulate a glitch/bounce of switch
     
-    @(posedge r_Clk);
+    repeat(1) @(posedge r_Clk);
+    
     r_Bouncy <= 1'b1; // bounce goes away
     
-    repeat(6) @(posedge r_Clk);   
+    repeat(6) @(posedge r_Clk);
+       
     $display("Test Complete");
     $finish();
   end
+   
 endmodule

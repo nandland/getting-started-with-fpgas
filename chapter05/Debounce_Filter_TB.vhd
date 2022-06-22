@@ -20,7 +20,7 @@ begin
    
   process is 
   begin
-    wait for 12 ns;
+    wait for 10 ns;
     r_Bouncy <= '1';  -- toggle state of input pin
       
     wait until rising_edge(r_Clk);
