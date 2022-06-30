@@ -1,33 +1,23 @@
-# ##############################################################################
-
-# iCEcube PCF
-
-# Version:            2014.12.27052
-
-# File Generated:     Apr 27 2015 09:46:33
-
+# Go Board Pin Constraints File
 # Family & Device:    iCE40HX1K
-
 # Package:            VQ100
 
-# ##############################################################################
-
-### Main FPGA Clock
+# Main FPGA Clock
 set_io i_Clk 15
 
-### LED Pins:
+# LED Pins:
 set_io o_LED_1 56
 set_io o_LED_2 57
 set_io o_LED_3 59
 set_io o_LED_4 60
 
-## Push-Button Switches
+# Push-Button Switches
 set_io i_Switch_1 53
 set_io i_Switch_2 51
 set_io i_Switch_3 54
 set_io i_Switch_4 52
 
-### 7 Segment Outputs
+# 7 Segment Outputs
 set_io o_Segment1_A 3
 set_io o_Segment1_B 4
 set_io o_Segment1_C 93
@@ -43,11 +33,11 @@ set_io o_Segment2_E 94
 set_io o_Segment2_F 8
 set_io o_Segment2_G 96
 
-## UART Outputs
+# UART Outputs
 set_io i_UART_RX 73
 set_io o_UART_TX 74
 
-## VGA Outputs
+# VGA Outputs
 set_io o_VGA_HSync 26
 set_io o_VGA_VSync 27
 set_io o_VGA_Red_0 36
@@ -60,7 +50,7 @@ set_io o_VGA_Blu_0 28
 set_io o_VGA_Blu_1 41
 set_io o_VGA_Blu_2 42
 
-## PMOD Signals
+# PMOD Signals
 set_io io_PMOD_1 65
 set_io io_PMOD_2 64
 set_io io_PMOD_3 63
