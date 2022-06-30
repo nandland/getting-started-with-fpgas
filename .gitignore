@@ -4,6 +4,12 @@
 *#
 
 # iCEcube2 Projects
+chapter02/Switches_To_LEDs_Project_Verilog/*
+!chapter02/Switches_To_LEDs_Project_Verilog/Switches_To_LEDs_Project_Verilog_sbt.project
+
+chapter02/Switches_To_LEDs_Project_VHDL/*
+!chapter02/Switches_To_LEDs_Project_VHDL/Switches_To_LEDs_Project_VHDL_sbt.project
+
 chapter03/And_Gate_Project_Verilog/*
 !chapter03/And_Gate_Project_Verilog/And_Gate_Project_Verilog_sbt.project
 
