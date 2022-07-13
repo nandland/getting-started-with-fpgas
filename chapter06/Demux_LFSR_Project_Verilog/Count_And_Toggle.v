@@ -3,9 +3,9 @@
 // Can reset the state of o_Toggle to 0 by disabling i_Enable
 
 module Count_And_Toggle #(COUNT_LIMIT = 10)
-   (input i_Clk,
-    input i_Enable,
-    output reg o_Toggle);
+ (input i_Clk,
+  input i_Enable,
+  output reg o_Toggle);
     
   // Create the signal to do the actual counting
   // Subtract 1, since counter starts at 0
