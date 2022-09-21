@@ -25,7 +25,8 @@ module Count_And_Toggle #(COUNT_LIMIT = 10)
         r_Counter <= r_Counter + 1;
     end
     else
-      o_Toggle <= 1'b0;
+      o_Toggle  <= 1'b0;
+      r_Counter <= 0;
   end
 
 endmodule

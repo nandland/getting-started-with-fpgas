@@ -35,7 +35,8 @@ begin
          r_Counter <= r_Counter + 1;
        end if;
       else
-        o_Toggle <= '0';
+        o_Toggle  <= '0';
+        r_Counter <= 0;
       end if;
     end if;
   end process;
