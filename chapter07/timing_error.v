@@ -1,11 +1,9 @@
 module timing_error
   (input  i_Clk,
    input [7:0] i_Data,
-   output reg [7:0] o_Data);
+   output reg [15:0] o_Data);
 
-  reg [7:0] r0_Data = 0;
-  reg [7:0] r1_Data = 0;
-  reg [7:0] r2_Data = 0;
+  reg [7:0] r0_Data, r1_Data, r2_Data = 0;
 
   always @(posedge i_Clk)
   begin
