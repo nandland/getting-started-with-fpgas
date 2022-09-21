@@ -4,7 +4,7 @@ Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Bui
 ProjectName=State_Machine_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=Count_And_Toggle.v=work,State_Machine_Project_Top.v=work,LFSR_22.v=work
+ProjectVFiles=State_Machine_Project_Top.v=work,Binary_To_7Segment.v,State_Machine_Game.v,../../chapter06/Demux_LFSR_Project_Verilog/Count_And_Toggle.v,../../chapter06/Demux_LFSR_Project_Verilog/LFSR_22.v,../../chapter05/Debounce_Filter.v
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
 CurImplementation=State_Machine_Project_Verilog_Implmnt
 Implementations=State_Machine_Project_Verilog_Implmnt
@@ -16,13 +16,13 @@ DeviceFamily=iCE40
 Device=HX1K
 DevicePackage=VQ100
 DevicePower=
-NetlistFile=
+NetlistFile=State_Machine_Project_Verilog_Implmnt/State_Machine_Project_Verilog.edf
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=
-DesignView=
-DesignCell=
-SynthesisSDCFile=
+DesignLib=State_Machine_Project_Verilog_Implmnt/sbt/netlist/oadb-State_Machine_Project_Top
+DesignView=_rt
+DesignCell=State_Machine_Project_Top
+SynthesisSDCFile=State_Machine_Project_Verilog_Implmnt/State_Machine_Project_Verilog.scf
 UserPinConstraintFile=
 UserSDCFile=
 PhysicalConstraintFile=../../Go_Board_Pin_Constraints.pcf

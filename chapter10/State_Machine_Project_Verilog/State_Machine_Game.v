@@ -15,7 +15,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
   input i_Switch_2,
   input i_Switch_3,
   input i_Switch_4,
-  output reg [$clog2(GAME_LIMIT)-1:0] o_Score,
+  output reg [7:0] o_Score,
   output o_LED_1,
   output o_LED_2,
   output o_LED_3,
@@ -23,18 +23,19 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
   );
 
   localparam IDLE         = 3'd0;
-  localparam PATTERN_SHOW = 3'd2;
-  localparam PATTERN_OFF  = 3'd3;
-  localparam WAIT_PLAYER  = 3'd4;
-  localparam CHECK_VAL    = 3'd5;
-  localparam INCR_SCORE   = 3'd1;
-  localparam FAILURE      = 3'd6;
-  localparam YOU_WIN      = 3'd7;
+  localparam PATTERN_SHOW = 3'd1;
+  localparam PATTERN_OFF  = 3'd2;
+  localparam WAIT_PLAYER  = 3'd3;
+  localparam CHECK_VAL    = 3'd4;
+  localparam INCR_SCORE   = 3'd5;
+  localparam LOSER        = 3'd6;
+  localparam WINNER       = 3'd7;
 
+  integer i; // used in for loop
   reg [2:0] r_SM_Main;
   reg r_Count_En, r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV;
-  reg [1:0] r_Pattern[GAME_LIMIT-1:0]; // 2D Array: 2-bit wide x GAME_LIMIT deep
-  wire [21:0] w_LFSR1_Data;
+  reg [1:0] r_Pattern[10:0]; // 2D Array: 2-bit wide x 11 deep (max game size)
+  wire [21:0] w_LFSR_Data;
   reg [$clog2(GAME_LIMIT)-1:0] r_Index; // Display index for showing LED pattern
   reg [1:0] r_Button_ID;
 
@@ -72,7 +73,10 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
         begin
           if (!w_Toggle & r_Toggle) // Falling edge found
             if (o_Score == r_Index)
+            begin
+              r_Index   <= 0;
               r_SM_Main <= WAIT_PLAYER;
+            end
             else 
             begin
               r_Index   <= r_Index + 1;
@@ -84,31 +88,32 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
         WAIT_PLAYER:
         begin
           if (r_Button_DV)
-            if (r_Pattern[r_Index] == r_Button_ID)
+            if (r_Pattern[r_Index] == r_Button_ID && r_Index == o_Score)
               r_SM_Main <= INCR_SCORE;
-            else
+            else if (r_Pattern[r_Index] != r_Button_ID)
               r_SM_Main <= IDLE;
-        end
-
-        FAILURE:
-        begin
-          r_SM_Main
         end
 
         // Used to increment Score Counter
         INCR_SCORE: 
         begin
-          o_Score   <= o_Score + 1;
+          o_Score <= o_Score + 1;
           if (o_Score == GAME_LIMIT)
-            r_SM_Main <= YOU_WIN;
+            r_SM_Main <= WINNER;
           else
             r_SM_Main <= PATTERN_SHOW;
         end
 
-
-        YOU_WIN: 
+        // Display 0xAA on 7-Segment displays, stay here until new game starts
+        WINNER: 
         begin
-          
+          o_Score <= 8'hAA; // Winner!
+        end
+
+        // Display 0xEE on 7-Segment displays, stay here until new game starts
+        LOSER:
+        begin
+          o_Score <= 8'hEE; // Loser!
         end
 
         default:
@@ -124,17 +129,18 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
   begin
     if (r_SM_Main == IDLE)
     begin
+      r_Pattern[0]  <= w_LFSR_Data[1:0];
+      r_Pattern[1]  <= w_LFSR_Data[3:2];
+      r_Pattern[2]  <= w_LFSR_Data[5:4];
+      r_Pattern[3]  <= w_LFSR_Data[7:6];
+      r_Pattern[4]  <= w_LFSR_Data[9:8];
+      r_Pattern[5]  <= w_LFSR_Data[11:10];
+      r_Pattern[6]  <= w_LFSR_Data[13:12];
+      r_Pattern[7]  <= w_LFSR_Data[15:14];
+      r_Pattern[8]  <= w_LFSR_Data[17:16];
+      r_Pattern[9]  <= w_LFSR_Data[19:18];
+      r_Pattern[10] <= w_LFSR_Data[21:20];
     end
-      for (i=0; i<GAME_LIMIT; i=i+1)
-        r_Pattern[i] <= w_LFSR_Data[i*2+1:i*2];
-
-      /* Equivalent to: 
-      r_Pattern[0] <= w_LFSR_Data[1:0];
-      r_Pattern[1] <= w_LFSR_Data[3:2];
-      r_Pattern[2] <= w_LFSR_Data[5:4];
-      r_Pattern[3] <= w_LFSR_Data[7:5];
-      etc...
-      */
   end
 
   assign o_LED_1 = (r_SM_Main == PATTERN_SHOW) ? r_Pattern[r_Index] : i_Switch_1;
