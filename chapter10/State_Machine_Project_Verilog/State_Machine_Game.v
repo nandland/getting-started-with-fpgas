@@ -8,7 +8,7 @@
 // If they get it correct, will add 1 more LED blink to the sequence
 // until the player makes a mistake. Game is over at 8 successful in a row.
 
-module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
+module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
                              parameter GAME_LIMIT = 6)
  (input i_Clk,
   input i_Switch_1,
@@ -23,38 +23,43 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
   );
 
   localparam IDLE         = 3'd0;
-  localparam PATTERN_SHOW = 3'd1;
-  localparam PATTERN_OFF  = 3'd2;
-  localparam WAIT_PLAYER  = 3'd3;
-  localparam CHECK_VAL    = 3'd4;
+  localparam START        = 3'd1;
+  localparam PATTERN_SHOW = 3'd2;
+  localparam PATTERN_OFF  = 3'd3;
+  localparam WAIT_PLAYER  = 3'd4;
   localparam INCR_SCORE   = 3'd5;
   localparam LOSER        = 3'd6;
   localparam WINNER       = 3'd7;
 
-  integer i; // used in for loop
   reg [2:0] r_SM_Main;
-  reg r_Count_En, r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV;
+  reg r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV;
   reg [1:0] r_Pattern[10:0]; // 2D Array: 2-bit wide x 11 deep (max game size)
   wire [21:0] w_LFSR_Data;
   reg [$clog2(GAME_LIMIT)-1:0] r_Index; // Display index for showing LED pattern
   reg [1:0] r_Button_ID;
+  wire w_Count_En, w_Toggle;
 
   always @(posedge i_Clk)
   begin
 
     // Reset game from any state
-    if (i_Switch_1 && i_Switch_2)
-      r_SM_Main <= IDLE;
+    if (i_Switch_1 & i_Switch_2)
+      r_SM_Main <= START;
     else
     begin
 
       // Main state machine switch statement
       case (r_SM_Main)
 
-        // Stay in IDLE state until user releases Switch_1 and Switch_2
         IDLE:
         begin
-          if (!i_Switch_1 & !i_Switch_2) // wait for reset condition to go away
+          r_SM_Main <= IDLE; // Exit condition is above
+        end
+
+        // Stay in START state until user releases Switch_1 and Switch_2
+        START:
+        begin
+          if (!i_Switch_1 & !i_Switch_2 & r_Button_DV) // wait for reset condition to go away
           begin
             o_Score   <= 0;
             r_Index   <= 0;
@@ -92,6 +97,8 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
               r_SM_Main <= INCR_SCORE;
             else if (r_Pattern[r_Index] != r_Button_ID)
               r_SM_Main <= IDLE;
+            else
+              r_Index <= r_Index + 1;
         end
 
         // Used to increment Score Counter
@@ -143,8 +150,10 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
     end
   end
 
-  assign o_LED_1 = (r_SM_Main == PATTERN_SHOW) ? r_Pattern[r_Index] : i_Switch_1;
-  // repeat for all LEDs
+  assign o_LED_1 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b00) ? 1'b1 : i_Switch_1;
+  assign o_LED_2 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b01) ? 1'b1 : i_Switch_2;
+  assign o_LED_3 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b10) ? 1'b1 : i_Switch_3;
+  assign o_LED_4 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b11) ? 1'b1 : i_Switch_4;
 
   // Create registers to enable falling edge detection
   always @(posedge i_Clk)
@@ -189,11 +198,11 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 250000000,
 
   Count_And_Toggle #(.COUNT_LIMIT(CLKS_PER_SEC)) Count_Inst
    (.i_Clk(i_Clk),
-    .i_Enable(r_Count_En),
+    .i_Enable(w_Count_En),
     .o_Toggle(w_Toggle));
 
   // Generates 22-bit wide random data
-  LFSR_22 LFSR1_Inst
+  LFSR_22 LFSR_Inst
    (.i_Clk(i_Clk),
     .o_LFSR_Data(w_LFSR_Data),
     .o_LFSR_Done());
