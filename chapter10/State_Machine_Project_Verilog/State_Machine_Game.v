@@ -22,14 +22,13 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
   output o_LED_4
   );
 
-  localparam IDLE         = 3'd0;
-  localparam START        = 3'd1;
-  localparam PATTERN_SHOW = 3'd2;
-  localparam PATTERN_OFF  = 3'd3;
-  localparam WAIT_PLAYER  = 3'd4;
-  localparam INCR_SCORE   = 3'd5;
-  localparam LOSER        = 3'd6;
-  localparam WINNER       = 3'd7;
+  localparam START        = 3'd0;
+  localparam PATTERN_OFF  = 3'd1;
+  localparam PATTERN_SHOW = 3'd2; 
+  localparam WAIT_PLAYER  = 3'd3;
+  localparam INCR_SCORE   = 3'd4;
+  localparam LOSER        = 3'd5;
+  localparam WINNER       = 3'd6;
 
   reg [2:0] r_SM_Main;
   reg r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV;
@@ -51,11 +50,6 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
       // Main state machine switch statement
       case (r_SM_Main)
 
-        IDLE:
-        begin
-          r_SM_Main <= IDLE; // Exit condition is above
-        end
-
         // Stay in START state until user releases Switch_1 and Switch_2
         START:
         begin
@@ -63,18 +57,18 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
           begin
             o_Score   <= 0;
             r_Index   <= 0;
-            r_SM_Main <= PATTERN_SHOW;
+            r_SM_Main <= PATTERN_OFF;
           end
+        end
+
+        PATTERN_OFF:
+        begin
+          if (!w_Toggle & r_Toggle) // Falling edge found
+            r_SM_Main <= PATTERN_SHOW;
         end
 
         // Shows the next LED in the pattern
         PATTERN_SHOW:
-        begin
-          if (!w_Toggle & r_Toggle) // Falling edge found
-            r_SM_Main <= PATTERN_OFF;
-        end
-
-        PATTERN_OFF:
         begin
           if (!w_Toggle & r_Toggle) // Falling edge found
             if (o_Score == r_Index)
@@ -85,7 +79,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
             else 
             begin
               r_Index   <= r_Index + 1;
-              r_SM_Main <= PATTERN_SHOW;  
+              r_SM_Main <= PATTERN_OFF;  
             end
               
         end
@@ -94,9 +88,12 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
         begin
           if (r_Button_DV)
             if (r_Pattern[r_Index] == r_Button_ID && r_Index == o_Score)
+            begin
+              r_Index   <= 0;
               r_SM_Main <= INCR_SCORE;
+            end
             else if (r_Pattern[r_Index] != r_Button_ID)
-              r_SM_Main <= IDLE;
+              r_SM_Main <= LOSER;
             else
               r_Index <= r_Index + 1;
         end
@@ -105,16 +102,16 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
         INCR_SCORE: 
         begin
           o_Score <= o_Score + 1;
-          if (o_Score == GAME_LIMIT)
+          if (o_Score == GAME_LIMIT-1)
             r_SM_Main <= WINNER;
           else
-            r_SM_Main <= PATTERN_SHOW;
+            r_SM_Main <= PATTERN_OFF;
         end
 
         // Display 0xAA on 7-Segment displays, stay here until new game starts
         WINNER: 
         begin
-          o_Score <= 8'hAA; // Winner!
+          o_Score <= 8'hA1; // Winner!
         end
 
         // Display 0xEE on 7-Segment displays, stay here until new game starts
@@ -124,7 +121,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
         end
 
         default:
-          r_SM_Main <= IDLE;
+          r_SM_Main <= START;
       endcase 
     end
 
@@ -134,7 +131,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
   // Each 2-bits of LFSR is one value for r_Pattern 2D Array.
   always @(posedge i_Clk)
   begin
-    if (r_SM_Main == IDLE)
+    if (r_SM_Main == START)
     begin
       r_Pattern[0]  <= w_LFSR_Data[1:0];
       r_Pattern[1]  <= w_LFSR_Data[3:2];
@@ -191,12 +188,10 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
     end
   end
 
-  
-
   // w_Count_En is high when state machine is in PATTERN_SHOW state or PATTERN_OFF state, else false
   assign w_Count_En = (r_SM_Main == PATTERN_SHOW || r_SM_Main == PATTERN_OFF);
 
-  Count_And_Toggle #(.COUNT_LIMIT(CLKS_PER_SEC)) Count_Inst
+  Count_And_Toggle #(.COUNT_LIMIT(CLKS_PER_SEC/4)) Count_Inst
    (.i_Clk(i_Clk),
     .i_Enable(w_Count_En),
     .o_Toggle(w_Toggle));

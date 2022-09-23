@@ -3,6 +3,8 @@
 
 module State_Machine_Game_TB ();
 
+  localparam CLKS_PER_SEC = 6;
+  
   reg r_Clk = 1'b0;
   reg r_Switch_1 = 1'b0, r_Switch_2 = 1'b0, r_Switch_3 = 1'b0, r_Switch_4 = 1'b0;
   wire w_LED_1, w_LED_2, w_LED_3, w_LED_4;
@@ -11,7 +13,7 @@ module State_Machine_Game_TB ();
   always #2 r_Clk <= !r_Clk;
 
 
-  State_Machine_Game #(.CLKS_PER_SEC(5),
+  State_Machine_Game #(.CLKS_PER_SEC(CLKS_PER_SEC),
                        .GAME_LIMIT(3)) Game_Inst
    (.i_Clk(r_Clk),
     .i_Switch_1(r_Switch_1),
@@ -42,18 +44,39 @@ module State_Machine_Game_TB ();
       @(posedge r_Clk);
     end
   endtask
-   
+  
+  
   initial begin
     // Required for EDA Playground
     $dumpfile("dump.vcd"); 
     $dumpvars;
     set_switches(0, 0, 0, 0);
-    repeat(10) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
     set_switches(1, 1, 0, 0);
-    
-    repeat(10) @(posedge r_Clk);
-    repeat(10) @(posedge r_Clk);
-    repeat(10) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    set_switches(0, 0, 0, 1);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    set_switches(0, 0, 0, 1);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    set_switches(0, 0, 0, 1);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+
+    // Reset game back to start
+    set_switches(1, 1, 0, 0);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
+    repeat(CLKS_PER_SEC/2) @(posedge r_Clk);
        
     $display("Test Complete");
     $finish();
