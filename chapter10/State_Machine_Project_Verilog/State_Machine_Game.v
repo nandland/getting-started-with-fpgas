@@ -32,7 +32,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
 
   reg [2:0] r_SM_Main;
   reg r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV;
-  reg [1:0] r_Pattern[10:0]; // 2D Array: 2-bit wide x 11 deep (max game size)
+  reg [1:0] r_Pattern[0:10]; // 2D Array: 2-bit wide x 11 deep (max game size)
   wire [21:0] w_LFSR_Data;
   reg [$clog2(GAME_LIMIT)-1:0] r_Index; // Display index for showing LED pattern
   reg [1:0] r_Button_ID;
@@ -53,7 +53,8 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
         // Stay in START state until user releases Switch_1 and Switch_2
         START:
         begin
-          if (!i_Switch_1 & !i_Switch_2 & r_Button_DV) // wait for reset condition to go away
+          // wait for reset condition to go away
+          if (!i_Switch_1 & !i_Switch_2 & r_Button_DV) 
           begin
             o_Score   <= 0;
             r_Index   <= 0;

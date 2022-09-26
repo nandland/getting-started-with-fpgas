@@ -21,10 +21,10 @@ entity State_Machine_Project_Top is
     i_Switch_3 : in std_logic;
     i_Switch_4 : in std_logic;
     -- Output LEDs for displaying pattern
-    o_LED_1 : in std_logic;
-    o_LED_2 : in std_logic;
-    o_LED_3 : in std_logic;
-    o_LED_4 : in std_logic;
+    o_LED_1 : out std_logic;
+    o_LED_2 : out std_logic;
+    o_LED_3 : out std_logic;
+    o_LED_4 : out std_logic;
     -- Tens Digit of Scoreboard
     o_Segment1_A : out std_logic;
     o_Segment1_B : out std_logic;
@@ -46,7 +46,7 @@ end entity State_Machine_Project_Top;
 
 architecture RTL of State_Machine_Project_Top is
 
-  constant GAME_LIMIT     : integer := 6;         -- Incease to make game harder
+  constant GAME_LIMIT     : integer := 7;         -- Incease to make game harder
   constant CLKS_PER_SEC   : integer := 25000000;  -- 25 MHz clock
   constant DEBOUNCE_LIMIT : integer := 250000;    -- 10 ms debounce filter
 

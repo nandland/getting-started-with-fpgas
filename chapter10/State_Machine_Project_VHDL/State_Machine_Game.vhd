@@ -14,7 +14,7 @@ use IEEE.numeric_std.all;
 
 entity State_Machine_Game is 
   generic (
-    CLKS_PER_SEC : integer := 250000000;
+    CLKS_PER_SEC : integer := 25000000;
     GAME_LIMIT   : integer := 6);
   port(
     i_Clk      : in std_logic;
@@ -32,18 +32,19 @@ end entity State_Machine_Game;
 
 architecture RTL of State_Machine_Game is
 
-  type t_SM_Main is (IDLE, PATTERN_SHOW, PATTERN_OFF, WAIT_PLAYER, INCR_SCORE, LOSER, WINNER);
+  type t_SM_Main is (START, PATTERN_OFF, PATTERN_SHOW, WAIT_PLAYER, INCR_SCORE, LOSER, WINNER);
 
   signal r_SM_Main : t_SM_Main;
   signal w_Count_En, w_Toggle, r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV : std_logic;
 
-  type t_Pattern is array (0 to GAME_LIMIT-1) of std_logic_vector(1 downto 0);
-  signal r_Pattern : t_Pattern; -- 2D Array: 2-bit wide x 11 deep (max game size) 
+  type t_Pattern is array (0 to 10) of std_logic_vector(1 downto 0);
+  signal r_Pattern : t_Pattern; -- 2D Array: 2-bit wide x 11 deep (max game size)
   
   signal w_LFSR_Data : std_logic_vector(21 downto 0);
   signal r_Index : integer range 0 to GAME_LIMIT;
   signal w_Index_SLV : std_logic_vector(7 downto 0);
   signal r_Button_ID : std_logic_vector(1 downto 0);
+  signal r_Score : unsigned(7 downto 0);
 
 begin
     
@@ -52,70 +53,72 @@ begin
     if rising_edge(i_Clk) then
     
       -- Reset game from any state
-    if i_Switch_1 and i_Switch_2 then
-      r_SM_Main <= IDLE;
-    else
-      -- Main state machine switch statement
-    
-      case r_SM_Main is
+      if i_Switch_1 = '1' and i_Switch_2 = '1' then
+        r_SM_Main <= START;
+      else
 
-        -- Stay in IDLE state until user releases Switch_1 and Switch_2
-        when IDLE =>
-          if i_Switch_1 = '0' and  i_Switch_2 = '0' then -- wait for reset condition to go away
-            o_Score   <= 0;
-            r_Index   <= 0;
-            r_SM_Main <= PATTERN_SHOW;
-          end if;
+        -- Main state machine switch statement
+        case r_SM_Main is
 
-        -- Shows the next LED in the pattern
-        when PATTERN_SHOW =>
-          if w_Toggle = '0' and r_Toggle = '1' then -- Falling edge found
-            r_SM_Main <= PATTERN_OFF;
-          end if;
-
-        when PATTERN_OFF =>
-          if w_Toggle = '0' and r_Toggle = '1' then -- Falling edge found
-            if o_Score = r_Index then
+          -- Stay in START state until user releases Switch_1 and Switch_2
+          when START =>
+          -- wait for reset condition to go away
+            if i_Switch_1 = '0' and  i_Switch_2 = '0' and r_Button_DV = '1' then
+              r_Score   <= to_unsigned(0, r_Score'length);
               r_Index   <= 0;
-              r_SM_Main <= WAIT_PLAYER;
-            else 
-              r_Index   <= r_Index + 1;
-              r_SM_Main <= PATTERN_SHOW;  
+              r_SM_Main <= PATTERN_OFF;
             end if;
+
+          when PATTERN_OFF =>
+            if w_Toggle = '0' and r_Toggle = '1' then -- Falling edge found
+              r_SM_Main <= PATTERN_SHOW;
+            end if;
+
+          -- Shows the next LED in the pattern
+          when PATTERN_SHOW =>
+            if w_Toggle = '0' and r_Toggle = '1' then -- Falling edge found
+              if r_Score = r_Index then
+                r_Index   <= 0;
+                r_SM_Main <= WAIT_PLAYER;
+              else 
+                r_Index   <= r_Index + 1;
+                r_SM_Main <= PATTERN_OFF;  
+              end if;
+            end if;
+
+          when WAIT_PLAYER =>
+            if r_Button_DV = '1' then
+              if (r_Pattern(r_Index) = r_Button_ID and unsigned(w_Index_SLV) = r_Score) then
+                r_Index   <= 0;
+                r_SM_Main <= INCR_SCORE;
+              elsif r_Pattern(r_Index) /= r_Button_ID then
+                r_SM_Main <= LOSER;
+              else
+                r_Index <= r_Index + 1;
+              end if;
           end if;
 
-        when WAIT_PLAYER =>
-          if r_Button_DV = '1' then
-            if (r_Pattern(r_Index) = r_Button_ID and w_Index_SLV = o_Score) then
-              r_SM_Main <= INCR_SCORE;
-            elsif r_Pattern(r_Index) /= r_Button_ID then
-              r_SM_Main <= IDLE;
+          -- Used to increment Score Counter
+          when INCR_SCORE =>
+            r_Score <= r_Score + 1;
+            if r_Score = GAME_LIMIT then
+              r_SM_Main <= WINNER;
             else
-              r_Index <= r_Index + 1;
+              r_SM_Main <= PATTERN_OFF;
             end if;
-        end if;
 
-        -- Used to increment Score Counter
-        when INCR_SCORE =>
-          o_Score <= o_Score + 1;
-          if to_integer(unsigned(o_Score)) = GAME_LIMIT then
-            r_SM_Main <= WINNER;
-          else
-            r_SM_Main <= PATTERN_SHOW;
-          end if;
+          -- Display 0xAA on 7-Segment displays, stay here until new game starts
+          when WINNER =>
+            r_Score <= X"AA"; -- Winner!
 
-        -- Display 0xAA on 7-Segment displays, stay here until new game starts
-        when WINNER =>
-          o_Score <= X"AA"; -- Winner!
+          -- Display 0xEE on 7-Segment displays, stay here until new game starts
+          when LOSER =>
+            r_Score <= X"EE"; -- Loser!
 
-        -- Display 0xEE on 7-Segment displays, stay here until new game starts
-        when LOSER =>
-          o_Score <= X"EE"; -- Loser!
-        end
-
-        when others =>
-          r_SM_Main <= IDLE;
-      end case;
+          when others =>
+            r_SM_Main <= START;
+        end case;
+      end if;
     end if;
   end process;
 
@@ -126,7 +129,7 @@ begin
   process (i_Clk) is
   begin
     if rising_edge(i_Clk) then
-      if r_SM_Main = IDLE then
+      if r_SM_Main = START then
         r_Pattern(0)  <= w_LFSR_Data(1 downto 0);
         r_Pattern(1)  <= w_LFSR_Data(3 downto 2);
         r_Pattern(2)  <= w_LFSR_Data(5 downto 4);
@@ -181,7 +184,7 @@ begin
 
   Count_Inst : entity work.Count_And_Toggle 
   generic map (
-    COUNT_LIMIT => CLKS_PER_SEC)
+    COUNT_LIMIT => CLKS_PER_SEC/4)
   port map (
     i_Clk    => i_Clk,
     i_Enable => w_Count_En,
@@ -193,5 +196,7 @@ begin
     i_Clk       => i_Clk,
     o_LFSR_Data => w_LFSR_Data,
     o_LFSR_Done => open);  -- leave unconnected
+
+  o_Score <= std_logic_vector(r_Score);
 
 end RTL;
