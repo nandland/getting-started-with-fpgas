@@ -22,13 +22,12 @@ entity Binary_To_7Segment is
     o_Segment_D  : out std_logic;
     o_Segment_E  : out std_logic;
     o_Segment_F  : out std_logic;
-    o_Segment_G  : out std_logic
-    );
+    o_Segment_G  : out std_logic);
 end entity Binary_To_7Segment;
 
 architecture RTL of Binary_To_7Segment is
 
-  signal r_Hex_Encoding : std_logic_vector(7 downto 0) := (others => '0');
+  signal r_Hex_Encoding : std_logic_vector(7 downto 0);
   
 begin
 
