@@ -21,15 +21,7 @@ module State_Machine_Project_Top
   output o_LED_2,
   output o_LED_3,
   output o_LED_4,
-  // Tens Digit of Scoreboard
-  output o_Segment1_A,
-  output o_Segment1_B,
-  output o_Segment1_C,
-  output o_Segment1_D,
-  output o_Segment1_E,
-  output o_Segment1_F,
-  output o_Segment1_G,
-  // Ones Digit of Scoreboard
+  // Scoreboard, 7-segment display
   output o_Segment2_A,
   output o_Segment2_B,
   output o_Segment2_C,
@@ -43,9 +35,9 @@ module State_Machine_Project_Top
   localparam DEBOUNCE_LIMIT = 250000;   // 10 ms debounce filter
 
   wire w_Switch_1, w_Switch_2, w_Switch_3, w_Switch_4;
-  wire w_Segment1_A, w_Segment1_B, w_Segment1_C, w_Segment1_D, w_Segment1_E, w_Segment1_F, w_Segment1_G;
-  wire w_Segment2_A, w_Segment2_B, w_Segment2_C, w_Segment2_D, w_Segment2_E, w_Segment2_F, w_Segment2_G;
-  wire [7:0] w_Score;
+  wire w_Segment2_A, w_Segment2_B, w_Segment2_C, w_Segment2_D;
+  wire w_Segment2_E, w_Segment2_F, w_Segment2_G;
+  wire [3:0] w_Score;
 
   // Debounce all switch inputs to remove mechanical glitches
   Debounce_Filter #(.DEBOUNCE_LIMIT(DEBOUNCE_LIMIT)) Debounce_SW1
@@ -81,22 +73,9 @@ module State_Machine_Project_Top
     .o_LED_3(o_LED_3),
     .o_LED_4(o_LED_4));
 
-  // Bits 7:4 drive the tens digit of the Scoreboard.
-  Binary_To_7Segment Digit_Tens
+  Binary_To_7Segment Scoreboard
    (.i_Clk(i_Clk),
-    .i_Binary_Num(w_Score[7:4]),
-    .o_Segment_A(w_Segment1_A),
-    .o_Segment_B(w_Segment1_B),
-    .o_Segment_C(w_Segment1_C),
-    .o_Segment_D(w_Segment1_D),
-    .o_Segment_E(w_Segment1_E),
-    .o_Segment_F(w_Segment1_F),
-    .o_Segment_G(w_Segment1_G));
-
-  // Bits 3:0 drive the ones digit of the Scoreboard.
-  Binary_To_7Segment Digit_Ones
-   (.i_Clk(i_Clk),
-    .i_Binary_Num(w_Score[3:0]),
+    .i_Binary_Num(w_Score),
     .o_Segment_A(w_Segment2_A),
     .o_Segment_B(w_Segment2_B),
     .o_Segment_C(w_Segment2_C),
@@ -106,14 +85,6 @@ module State_Machine_Project_Top
     .o_Segment_G(w_Segment2_G));
     
   // Invert needed on Go Board
-  assign o_Segment1_A = !w_Segment1_A;
-  assign o_Segment1_B = !w_Segment1_B;
-  assign o_Segment1_C = !w_Segment1_C;
-  assign o_Segment1_D = !w_Segment1_D;
-  assign o_Segment1_E = !w_Segment1_E;
-  assign o_Segment1_F = !w_Segment1_F;
-  assign o_Segment1_G = !w_Segment1_G;
-
   assign o_Segment2_A = !w_Segment2_A;
   assign o_Segment2_B = !w_Segment2_B;
   assign o_Segment2_C = !w_Segment2_C;

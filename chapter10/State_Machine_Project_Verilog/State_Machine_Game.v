@@ -15,7 +15,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
   input i_Switch_2,
   input i_Switch_3,
   input i_Switch_4,
-  output reg [7:0] o_Score,
+  output reg [3:0] o_Score,
   output o_LED_1,
   output o_LED_2,
   output o_LED_3,
@@ -31,10 +31,11 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
   localparam WINNER       = 3'd6;
 
   reg [2:0] r_SM_Main;
-  reg r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV;
-  reg [1:0] r_Pattern[0:10]; // 2D Array: 2-bit wide x 11 deep (max game size)
+  reg r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3; 
+  reg r_Switch_4, r_Button_DV;
+  reg [1:0] r_Pattern[0:10]; // 2D Array: 2-bit wide x 11 deep
   wire [21:0] w_LFSR_Data;
-  reg [$clog2(GAME_LIMIT)-1:0] r_Index; // Display index for showing LED pattern
+  reg [$clog2(GAME_LIMIT)-1:0] r_Index; // Display index
   reg [1:0] r_Button_ID;
   wire w_Count_En, w_Toggle;
 
@@ -50,7 +51,7 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
       // Main state machine switch statement
       case (r_SM_Main)
 
-        // Stay in START state until user releases Switch_1 and Switch_2
+        // Stay in START state until user releases buttons
         START:
         begin
           // wait for reset condition to go away
@@ -109,16 +110,16 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
             r_SM_Main <= PATTERN_OFF;
         end
 
-        // Display 0xAA on 7-Segment displays, stay here until new game starts
+        // Display 0xA on 7-Segment display, wait for new game
         WINNER: 
         begin
-          o_Score <= 8'hA1; // Winner!
+          o_Score <= 4'hA; // Winner!
         end
 
-        // Display 0xEE on 7-Segment displays, stay here until new game starts
+        // Display 0xF on 7-Segment display, wait for new game
         LOSER:
         begin
-          o_Score <= 8'hEE; // Loser!
+          o_Score <= 4'hF; // Loser!
         end
 
         default:
@@ -148,10 +149,14 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
     end
   end
 
-  assign o_LED_1 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b00) ? 1'b1 : i_Switch_1;
-  assign o_LED_2 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b01) ? 1'b1 : i_Switch_2;
-  assign o_LED_3 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b10) ? 1'b1 : i_Switch_3;
-  assign o_LED_4 = (r_SM_Main == PATTERN_SHOW && r_Pattern[r_Index] == 2'b11) ? 1'b1 : i_Switch_4;
+  assign o_LED_1 = (r_SM_Main == PATTERN_SHOW && 
+                    r_Pattern[r_Index] == 2'b00) ? 1'b1 : i_Switch_1;
+  assign o_LED_2 = (r_SM_Main == PATTERN_SHOW && 
+                    r_Pattern[r_Index] == 2'b01) ? 1'b1 : i_Switch_2;
+  assign o_LED_3 = (r_SM_Main == PATTERN_SHOW && 
+                    r_Pattern[r_Index] == 2'b10) ? 1'b1 : i_Switch_3;
+  assign o_LED_4 = (r_SM_Main == PATTERN_SHOW && 
+                    r_Pattern[r_Index] == 2'b11) ? 1'b1 : i_Switch_4;
 
   // Create registers to enable falling edge detection
   always @(posedge i_Clk)
@@ -189,8 +194,10 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
     end
   end
 
-  // w_Count_En is high when state machine is in PATTERN_SHOW state or PATTERN_OFF state, else false
-  assign w_Count_En = (r_SM_Main == PATTERN_SHOW || r_SM_Main == PATTERN_OFF);
+  // w_Count_En is high when state machine is in 
+  // PATTERN_SHOW state or PATTERN_OFF state, else false
+  assign w_Count_En = (r_SM_Main == PATTERN_SHOW || 
+                       r_SM_Main == PATTERN_OFF);
 
   Count_And_Toggle #(.COUNT_LIMIT(CLKS_PER_SEC/4)) Count_Inst
    (.i_Clk(i_Clk),

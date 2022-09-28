@@ -25,15 +25,7 @@ entity State_Machine_Project_Top is
     o_LED_2 : out std_logic;
     o_LED_3 : out std_logic;
     o_LED_4 : out std_logic;
-    -- Tens Digit of Scoreboard
-    o_Segment1_A : out std_logic;
-    o_Segment1_B : out std_logic;
-    o_Segment1_C : out std_logic;
-    o_Segment1_D : out std_logic;
-    o_Segment1_E : out std_logic;
-    o_Segment1_F : out std_logic;
-    o_Segment1_G : out std_logic;
-    -- Ones Digit of Scoreboard
+    -- Scoreboard, 7-segment display
     o_Segment2_A : out std_logic;
     o_Segment2_B : out std_logic;
     o_Segment2_C : out std_logic;
@@ -51,9 +43,7 @@ architecture RTL of State_Machine_Project_Top is
   constant DEBOUNCE_LIMIT : integer := 250000;    -- 10 ms debounce filter
 
   signal w_Switch_1, w_Switch_2, w_Switch_3, w_Switch_4 : std_logic;
-  signal w_Score : std_logic_vector(7 downto 0);
-  signal w_Segment1_A, w_Segment1_B, w_Segment1_C, w_Segment1_D : std_logic;
-  signal w_Segment1_E, w_Segment1_F, w_Segment1_G : std_logic;
+  signal w_Score : std_logic_vector(3 downto 0);
   signal w_Segment2_A, w_Segment2_B, w_Segment2_C, w_Segment2_D : std_logic;
   signal w_Segment2_E, w_Segment2_F, w_Segment2_G : std_logic;
 
@@ -107,24 +97,10 @@ begin
       o_LED_3    => o_LED_3,
       o_LED_4    => o_LED_4);
 
-  -- Bits 7:4 drive the tens digit of the Scoreboard.
-  Digit_Tens : entity work.Binary_To_7Segment
+  Scoreboard : entity work.Binary_To_7Segment
     port map (
       i_Clk        => i_Clk,
-      i_Binary_Num => w_Score(7 downto 4),
-      o_Segment_A  => w_Segment1_A,
-      o_Segment_B  => w_Segment1_B,
-      o_Segment_C  => w_Segment1_C,
-      o_Segment_D  => w_Segment1_D,
-      o_Segment_E  => w_Segment1_E,
-      o_Segment_F  => w_Segment1_F,
-      o_Segment_G  => w_Segment1_G);
-
-  -- Bits 3:0 drive the ones digit of the Scoreboard.
-  Digit_Ones : entity work.Binary_To_7Segment
-    port map (
-      i_Clk        => i_Clk,
-      i_Binary_Num => w_Score(3 downto 0),
+      i_Binary_Num => w_Score,
       o_Segment_A  => w_Segment2_A,
       o_Segment_B  => w_Segment2_B,
       o_Segment_C  => w_Segment2_C,
@@ -134,14 +110,6 @@ begin
       o_Segment_G  => w_Segment2_G);
     
   -- Invert needed on Go Board
-  o_Segment1_A <= not w_Segment1_A;
-  o_Segment1_B <= not w_Segment1_B;
-  o_Segment1_C <= not w_Segment1_C;
-  o_Segment1_D <= not w_Segment1_D;
-  o_Segment1_E <= not w_Segment1_E;
-  o_Segment1_F <= not w_Segment1_F;
-  o_Segment1_G <= not w_Segment1_G;
-
   o_Segment2_A <= not w_Segment2_A;
   o_Segment2_B <= not w_Segment2_B;
   o_Segment2_C <= not w_Segment2_C;

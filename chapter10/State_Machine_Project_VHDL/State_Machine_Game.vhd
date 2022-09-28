@@ -22,7 +22,7 @@ entity State_Machine_Game is
     i_Switch_2 : in std_logic;
     i_Switch_3 : in std_logic;
     i_Switch_4 : in std_logic;
-    o_Score    : out std_logic_vector(7 downto 0);
+    o_Score    : out std_logic_vector(3 downto 0);
     o_LED_1    : out std_logic;
     o_LED_2    : out std_logic;
     o_LED_3    : out std_logic;
@@ -32,19 +32,21 @@ end entity State_Machine_Game;
 
 architecture RTL of State_Machine_Game is
 
-  type t_SM_Main is (START, PATTERN_OFF, PATTERN_SHOW, WAIT_PLAYER, INCR_SCORE, LOSER, WINNER);
+  type t_SM_Main is (START, PATTERN_OFF, PATTERN_SHOW, 
+                     WAIT_PLAYER, INCR_SCORE, LOSER, WINNER);
 
   signal r_SM_Main : t_SM_Main;
-  signal w_Count_En, w_Toggle, r_Toggle, r_Switch_1, r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV : std_logic;
+  signal w_Count_En, w_Toggle, r_Toggle, r_Switch_1 : std_logic;
+  signal r_Switch_2, r_Switch_3, r_Switch_4, r_Button_DV : std_logic;
 
   type t_Pattern is array (0 to 10) of std_logic_vector(1 downto 0);
-  signal r_Pattern : t_Pattern; -- 2D Array: 2-bit wide x 11 deep (max game size)
+  signal r_Pattern : t_Pattern; -- 2D Array: 2-bit wide x 11 deep
   
   signal w_LFSR_Data : std_logic_vector(21 downto 0);
   signal r_Index : integer range 0 to GAME_LIMIT;
   signal w_Index_SLV : std_logic_vector(7 downto 0);
   signal r_Button_ID : std_logic_vector(1 downto 0);
-  signal r_Score : unsigned(7 downto 0);
+  signal r_Score : unsigned(3 downto 0);
 
 begin
     
@@ -60,10 +62,11 @@ begin
         -- Main state machine switch statement
         case r_SM_Main is
 
-          -- Stay in START state until user releases Switch_1 and Switch_2
+          -- Stay in START state until user releases buttons
           when START =>
           -- wait for reset condition to go away
-            if i_Switch_1 = '0' and  i_Switch_2 = '0' and r_Button_DV = '1' then
+            if (i_Switch_1 = '0' and  i_Switch_2 = '0' and 
+                r_Button_DV = '1') then
               r_Score   <= to_unsigned(0, r_Score'length);
               r_Index   <= 0;
               r_SM_Main <= PATTERN_OFF;
@@ -88,7 +91,8 @@ begin
 
           when WAIT_PLAYER =>
             if r_Button_DV = '1' then
-              if (r_Pattern(r_Index) = r_Button_ID and unsigned(w_Index_SLV) = r_Score) then
+              if (r_Pattern(r_Index) = r_Button_ID and 
+                  unsigned(w_Index_SLV) = r_Score) then
                 r_Index   <= 0;
                 r_SM_Main <= INCR_SCORE;
               elsif r_Pattern(r_Index) /= r_Button_ID then
@@ -107,13 +111,13 @@ begin
               r_SM_Main <= PATTERN_OFF;
             end if;
 
-          -- Display 0xAA on 7-Segment displays, stay here until new game starts
+          -- Display 0xA on 7-Segment display, wait for new game
           when WINNER =>
-            r_Score <= X"AA"; -- Winner!
+            r_Score <= X"A"; -- Winner!
 
-          -- Display 0xEE on 7-Segment displays, stay here until new game starts
+          -- Display 0xF on 7-Segment display, wait for new game
           when LOSER =>
-            r_Score <= X"EE"; -- Loser!
+            r_Score <= X"F"; -- Loser!
 
           when others =>
             r_SM_Main <= START;
@@ -145,10 +149,14 @@ begin
     end if;
   end process;
 
-  o_LED_1 <= '1' when (r_SM_Main = PATTERN_SHOW and r_Pattern(r_Index) = "00") else i_Switch_1;
-  o_LED_2 <= '1' when (r_SM_Main = PATTERN_SHOW and r_Pattern(r_Index) = "01") else i_Switch_2;
-  o_LED_3 <= '1' when (r_SM_Main = PATTERN_SHOW and r_Pattern(r_Index) = "10") else i_Switch_3;
-  o_LED_4 <= '1' when (r_SM_Main = PATTERN_SHOW and r_Pattern(r_Index) = "11") else i_Switch_4;
+  o_LED_1 <= '1' when (r_SM_Main = PATTERN_SHOW and 
+                       r_Pattern(r_Index) = "00") else i_Switch_1;
+  o_LED_2 <= '1' when (r_SM_Main = PATTERN_SHOW and 
+                       r_Pattern(r_Index) = "01") else i_Switch_2;
+  o_LED_3 <= '1' when (r_SM_Main = PATTERN_SHOW and 
+                       r_Pattern(r_Index) = "10") else i_Switch_3;
+  o_LED_4 <= '1' when (r_SM_Main = PATTERN_SHOW and 
+                       r_Pattern(r_Index) = "11") else i_Switch_4;
 
   -- Create registers to enable falling edge detection
   process (i_Clk) is
@@ -179,8 +187,10 @@ begin
     end if;
   end process;
 
-  -- w_Count_En is high when state machine is in PATTERN_SHOW state or PATTERN_OFF state, else false
-  w_Count_En <= '1' when (r_SM_Main = PATTERN_SHOW or r_SM_Main = PATTERN_OFF) else '0';
+  -- w_Count_En is high when state machine is in
+  -- PATTERN_SHOW state or PATTERN_OFF state, else false
+  w_Count_En <= '1' when (r_SM_Main = PATTERN_SHOW or 
+                          r_SM_Main = PATTERN_OFF) else '0';
 
   Count_Inst : entity work.Count_And_Toggle 
   generic map (
