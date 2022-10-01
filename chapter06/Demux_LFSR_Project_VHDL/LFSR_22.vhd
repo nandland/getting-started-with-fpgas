@@ -11,7 +11,7 @@ end entity LFSR_22;
 
 architecture RTL of LFSR_22 is
 
-signal r_LFSR : std_logic_vector(21 downto 0);
+signal r_LFSR : std_logic_vector(21 downto 0) := (others => '0');
 signal w_XNOR : std_logic;
 
 begin

@@ -4,7 +4,7 @@ module LFSR_22 (
   output [21:0] o_LFSR_Data,
   output        o_LFSR_Done);
 
-reg [21:0] r_LFSR;
+reg [21:0] r_LFSR = 0;
 wire       w_XNOR;
 
 always @(posedge i_Clk)
