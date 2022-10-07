@@ -27,20 +27,26 @@ begin
   begin
     wait for 10 ns;
     r_Reset <= '0';
-    assert w_Locked severity failure;
     wait for 10 ns;
+    assert w_Locked severity failure;
+
     r_Coin <= '1';
-    assert w_Locked severity failure;
     wait for 10 ns;
+    assert not w_Locked severity failure;
+
     r_Push <= '1';
     wait for 10 ns;
+    assert w_Locked severity failure;
+
     r_Coin <= '0';
     wait for 10 ns;
+    assert w_Locked severity failure;
+
     r_Push <= '0';
     wait for 10 ns;
+    assert w_Locked severity failure;
+
     finish;  -- need VHDL-2008
   end process;
    
-  ADD_SELF_CHECKS_TO_THIS_MODULE
-
 end test;
