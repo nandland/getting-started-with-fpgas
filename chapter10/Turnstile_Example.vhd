@@ -20,7 +20,7 @@ begin
   -- Current State Register
  -- process (i_Clk, i_Reset) is
  -- begin
- --   if (i_Reset) then
+ --   if i_Reset = '1' then
  --     r_Curr_State <= LOCKED;
  --   elsif rising_edge(i_Clk) then
  --     r_Curr_State <= r_Next_State;
@@ -51,7 +51,7 @@ begin
   -- Single always block approach
   process (i_Clk, i_Reset) is
   begin
-    if (i_Reset) then
+    if i_Reset = '1' then
       r_Curr_State <= LOCKED;
     elsif rising_edge(i_Clk) then
   

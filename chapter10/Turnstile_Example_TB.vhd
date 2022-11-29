@@ -28,23 +28,23 @@ begin
     wait for 10 ns;
     r_Reset <= '0';
     wait for 10 ns;
-    assert w_Locked severity failure;
+    assert w_Locked = '1' severity failure;
 
     r_Coin <= '1';
     wait for 10 ns;
-    assert not w_Locked severity failure;
+    assert w_Locked = '0' severity failure;
 
     r_Push <= '1';
     wait for 10 ns;
-    assert w_Locked severity failure;
+    assert w_Locked = '1' severity failure;
 
     r_Coin <= '0';
     wait for 10 ns;
-    assert w_Locked severity failure;
+    assert w_Locked = '1' severity failure;
 
     r_Push <= '0';
     wait for 10 ns;
-    assert w_Locked severity failure;
+    assert w_Locked = '1' severity failure;
 
     finish;  -- need VHDL-2008
   end process;
