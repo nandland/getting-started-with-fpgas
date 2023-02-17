@@ -30,17 +30,27 @@ chapter05/Debounce_Project_VHDL/*
 !chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_sbt.project
 !chapter05/Debounce_Project_VHDL/Debounce_Project_VHDL_Implmnt/sbt/outputs/bitmap/Debounce_Project_Top_bitmap.bin
 
+chapter06/Demux_Count_Project_Verilog/*
+!chapter06/Demux_Count_Project_Verilog/Demux_Count_Project_Verilog_sbt.project
+!chapter06/Demux_Count_Project_Verilog/Demux_Count_Project_Top.v
+!chapter06/Demux_Count_Project_Verilog/Count_And_Toggle.v
+!chapter06/Demux_Count_Project_Verilog/Demux_Count_Project_Verilog_Implmnt/sbt/outputs/bitmap/Demux_Count_Project_Top_bitmap.bin
+
 chapter06/Demux_LFSR_Project_Verilog/*
 !chapter06/Demux_LFSR_Project_Verilog/Demux_LFSR_Project_Verilog_sbt.project
 !chapter06/Demux_LFSR_Project_Verilog/Demux_LFSR_Project_Top.v
-!chapter06/Demux_LFSR_Project_Verilog/Count_And_Toggle.v
 !chapter06/Demux_LFSR_Project_Verilog/LFSR_22.v
 !chapter06/Demux_LFSR_Project_Verilog/Demux_LFSR_Project_Verilog_Implmnt/sbt/outputs/bitmap/Demux_LFSR_Project_Top_bitmap.bin
+
+chapter06/Demux_Count_Project_VHDL/*
+!chapter06/Demux_Count_Project_VHDL/Demux_Count_Project_VHDL_sbt.project
+!chapter06/Demux_Count_Project_VHDL/Demux_Count_Project_Top.vhd
+!chapter06/Demux_Count_Project_VHDL/Count_And_Toggle.vhd
+!chapter06/Demux_Count_Project_VHDL/Demux_Count_Project_VHDL_Implmnt/sbt/outputs/bitmap/Demux_Count_Project_Top_bitmap.bin
 
 chapter06/Demux_LFSR_Project_VHDL/*
 !chapter06/Demux_LFSR_Project_VHDL/Demux_LFSR_Project_VHDL_sbt.project
 !chapter06/Demux_LFSR_Project_VHDL/Demux_LFSR_Project_Top.vhd
-!chapter06/Demux_LFSR_Project_VHDL/Count_And_Toggle.vhd
 !chapter06/Demux_LFSR_Project_VHDL/LFSR_22.vhd
 !chapter06/Demux_LFSR_Project_VHDL/Demux_LFSR_Project_VHDL_Implmnt/sbt/outputs/bitmap/Demux_LFSR_Project_Top_bitmap.bin
 

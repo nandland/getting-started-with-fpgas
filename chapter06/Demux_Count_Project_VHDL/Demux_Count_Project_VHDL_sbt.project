@@ -1,15 +1,15 @@
-[Demux_LFSR_Project_VHDL_Implmnt]
+[Demux_Count_Project_VHDL_Implmnt]
 DeviceFamily=iCE40
 Device=HX1K
 DevicePackage=VQ100
 DevicePower=
-NetlistFile=Demux_LFSR_Project_VHDL_Implmnt/Demux_LFSR_Project_VHDL.edf
+NetlistFile=Demux_Count_Project_VHDL_Implmnt/Demux_Count_Project_VHDL.edf
 AdditionalEDIFFile=
 IPEDIFFile=
-DesignLib=Demux_LFSR_Project_VHDL_Implmnt/sbt/netlist/oadb-Demux_LFSR_Project_Top
+DesignLib=Demux_Count_Project_VHDL_Implmnt/sbt/netlist/oadb-Demux_Count_Project_Top
 DesignView=_rt
-DesignCell=Demux_LFSR_Project_Top
-SynthesisSDCFile=Demux_LFSR_Project_VHDL_Implmnt/Demux_LFSR_Project_VHDL.scf
+DesignCell=Demux_Count_Project_Top
+SynthesisSDCFile=Demux_Count_Project_VHDL_Implmnt/Demux_Count_Project_VHDL.scf
 UserPinConstraintFile=
 UserSDCFile=
 PhysicalConstraintFile=../../Go_Board_Pin_Constraints.pcf
@@ -29,13 +29,13 @@ TimingPathNumberStick=0
 [Project]
 ProjectVersion=2.0
 Version=Lattice Semiconductor Corporation iCEcube - Release: 2020.12.27943 - Build Date: Dec 9 2020 18:31:09
-ProjectName=Demux_LFSR_Project_VHDL
+ProjectName=Demux_Count_Project_VHDL
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../Mux_Demux/Demux_1_To_4.vhd=work,Demux_LFSR_Project_Top.vhd=work,LFSR_22.vhd=work
+ProjectVFiles=Count_And_Toggle.vhd,Demux_Count_Project_Top.vhd,../Mux_Demux/Demux_1_To_4.vhd
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
-CurImplementation=Demux_LFSR_Project_VHDL_Implmnt
-Implementations=Demux_LFSR_Project_VHDL_Implmnt
+CurImplementation=Demux_Count_Project_VHDL_Implmnt
+Implementations=Demux_Count_Project_VHDL_Implmnt
 StartFromSynthesis=yes
 IPGeneration=false
 
@@ -47,7 +47,7 @@ EBRUtilization=100.00
 FSMEncodingStyle=Auto
 FixGatedClocks=True
 I/OInsertion=True
-IntermediateFileDump=True
+IntermediateFileDump=False
 LoopLimit=1950
 MaximalFanout=10000
 MemoryInitialValueFileSearchPath=
@@ -60,7 +60,7 @@ RWCheckOnRam=False
 RemoveDuplicateRegisters=True
 ResolvedMixedDrivers=False
 ResourceSharing=True
-TargetFrequency=200
+TargetFrequency=
 TopLevelUnit=
 UseIORegister=Auto
 VHDL2008=False

@@ -28,11 +28,11 @@ TimingPathNumberStick=0
 
 [Project]
 ProjectVersion=2.0
-Version=Lattice Semiconductor Corporation iCEcube - Release: 2014.12.27052 - Build Date: Dec 8 2014 15:21:57
+Version=Lattice Semiconductor Corporation iCEcube - Release: 2020.12.27943 - Build Date: Dec 9 2020 18:31:09
 ProjectName=Demux_LFSR_Project_Verilog
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=../Mux_Demux/Demux_1_To_4.v=work,Count_And_Toggle.v=work,Demux_LFSR_Project_Top.v=work,LFSR_22.v=work
+ProjectVFiles=../Mux_Demux/Demux_1_To_4.v=work,Demux_LFSR_Project_Top.v=work,LFSR_22.v=work
 ProjectCFiles=../../Go_Board_Clock_Constraint.sdc
 CurImplementation=Demux_LFSR_Project_Verilog_Implmnt
 Implementations=Demux_LFSR_Project_Verilog_Implmnt
@@ -48,6 +48,7 @@ FSMEncodingStyle=Auto
 FixGatedClocks=True
 I/OInsertion=True
 IntermediateFileDump=True
+LoopLimit=1950
 MaximalFanout=10000
 MemoryInitialValueFileSearchPath=
 NumberOfCriticalPaths=3
@@ -70,6 +71,7 @@ PlacerEffortLevel=std
 PlacerAutoLutCascade=yes
 PlacerAutoRamCascade=yes
 PlacerPowerDriven=no
+PlacerAreaDriven=no
 RouteWithTimingDriven=yes
 RouteWithPinPermutation=yes
 BitmapSPIFlashMode=yes
