@@ -13,7 +13,7 @@ architecture test of Math_Examples is
   -- Takes input unsigned, returns string for printing
   function str(val : in unsigned) return string is
   begin
-  	return to_string(to_integer(val));
+    return to_string(to_integer(val));
   end function str;
  
   -- Takes input signed, returns string for printing
@@ -42,21 +42,21 @@ begin
     
   begin
     
-	-- Unsigned + Unsigned = Unsigned (Rule #1 violation)
+    -- Unsigned + Unsigned = Unsigned (Rule #1 violation)
     i1_u4 := "1001"; -- dec 9
     i2_u4 := "1011"; -- dec 11
     o_u4  := i1_u4 + i2_u4;
     report "Ex01: " & str(i1_u4) & " + " & str(i2_u4) & " = " & str(o_u4);
 
-	-- Signed + Signed = Singed (Rule #1 violation)
+    -- Signed + Signed = Singed (Rule #1 violation)
     i1_s4 := "1001"; -- dec -7
     i2_s4 := "1011"; -- dec -5
     o_s4  := i1_s4 + i2_s4;
-	report "Ex02: " & str(i1_s4) & " + " & str(i2_s4) & " = " & str(o_s4);
+    report "Ex02: " & str(i1_s4) & " + " & str(i2_s4) & " = " & str(o_s4);
     
     -- Unsigned + Unsigned = Unsigned (Rule #1 Fix)
     i1_u4 := "1001"; -- dec 9
-	i2_u4 := "1101"; -- dec 11
+    i2_u4 := "1101"; -- dec 11
     i1_u5 := resize(i1_u4, i1_u5'length);
     i2_u5 := resize(i2_u4, i2_u5'length);
     o_u5  := i1_u5 + i2_u5;
@@ -72,7 +72,7 @@ begin
     
     -- Unsigned - Unsigned = Unsigned (bad)
     i1_u4 := "1001"; -- dec 9
-	i2_u4 := "1011"; -- dec 11
+    i2_u4 := "1011"; -- dec 11
     i1_u5 := resize(i1_u4, i1_u5'length);
     i2_u5 := resize(i2_u4, i2_u5'length);
     o_u5  := i1_u5 - i2_u5;
@@ -86,9 +86,9 @@ begin
     o_s5  := i1_s5 - i2_s5;
     report "Ex06: " & str(i1_s5) & " - " & str(i2_s5) & " = " & str(o_s5);
 
-	-- Unsigned * Unsigned = Unsigned
+    -- Unsigned * Unsigned = Unsigned
     --i1_u4 := "1001"; -- dec 9
-	--i2_u4 := "1011"; -- dec 11
+    --i2_u4 := "1011"; -- dec 11
     --o_u4  := i1_u4 * i2_u4;
     --report "Ex07: " & str(i1_u4) & " * " & str(i2_u4) & " = " & str(o_u8);
     
@@ -98,9 +98,9 @@ begin
     --o_s8  := i1_s4 * i2_s4;
     --report "Ex08: " & str(i1_s4) & " * " & str(i2_s4) & " = " & str(o_s8);
 
-	-- Unsigned * Unsigned = Unsigned
+    -- Unsigned * Unsigned = Unsigned
     i1_u4 := "1001"; -- dec 9
-	i2_u4 := "1011"; -- dec 11
+    i2_u4 := "1011"; -- dec 11
     o_u8  := i1_u4 * i2_u4;
     report "Ex09: " & str(i1_u4) & " * " & str(i2_u4) & " = " & str(o_u8);
     
@@ -110,10 +110,10 @@ begin
     o_s8  := i1_s4 * i2_s4;
     report "Ex10: " & str(i1_s4) & " * " & str(i2_s4) & " = " & str(o_s8);
 
-	-- Demonstrate: Multiply and Divide by base 2 numbers
+    -- Demonstrate: Multiply and Divide by base 2 numbers
     i1_u8 := to_unsigned(3, i1_u8'length);
     o_u8 := shift_left(i1_u8, 1);
-	report "Ex11: " & str(i1_u8) & " * 2 = "  & str(o_u8);
+    report "Ex11: " & str(i1_u8) & " * 2 = "  & str(o_u8);
     o_u8 := shift_left(i1_u8, 2);
     report "Ex12: " & str(i1_u8) & " * 4 = "  & str(o_u8);
     o_u8 := shift_left(i1_u8, 4);
@@ -121,21 +121,21 @@ begin
 
     i1_u8 := to_unsigned(128, i1_u8'length);
     o_u8 := shift_right(i1_u8, 1);
-	report "Ex14: " & str(i1_u8) & " / 2 = "  & str(o_u8);
+    report "Ex14: " & str(i1_u8) & " / 2 = "  & str(o_u8);
     o_u8 := shift_right(i1_u8, 2);
     report "Ex15: " & str(i1_u8) & " / 4 = "  & str(o_u8);
     o_u8 := shift_right(i1_u8, 4);
     report "Ex16: " & str(i1_u8) & " / 16 = " & str(o_u8);
 
-	i1_u8 := to_unsigned(15, i1_u8'length);
+    i1_u8 := to_unsigned(15, i1_u8'length);
     o_u8 := shift_right(i1_u8, 1);
-	report "Ex17: " & str(i1_u8) & " / 2 = " & str(o_u8);
+    report "Ex17: " & str(i1_u8) & " / 2 = " & str(o_u8);
     o_u8 := shift_right(i1_u8, 2);
     report "Ex18: " & str(i1_u8) & " / 4 = " & str(o_u8);
     o_u8 := shift_right(i1_u8, 3);
     report "Ex19: " & str(i1_u8) & " / 8 = " & str(o_u8);
 
-	-- Demonstrate: Modified Q Notation Examples
+    -- Demonstrate: Modified Q Notation Examples
     -- U3.1 + U4.0 = U4.1 (Rule #5 violation)
     i1_u4 := "0011";
     i2_u4 := "0011";
@@ -148,7 +148,7 @@ begin
     real3 := real(to_integer(o_u5)) / 2.0;
     report "Ex20: " & str(real1) & " + " & str(real2) & " = " & str(real3);
 
-	-- Convert U3.1 to U4.0
+    -- Convert U3.1 to U4.0
     -- U4.0 + U4.0 = U5.0 (Rule #5 fix, using truncation)
     i1_u4 := "0011";
     i2_u4 := "0011";
@@ -174,7 +174,7 @@ begin
     real1 := real(to_integer(i1_u6)) / 2.0;
     real2 := real(to_integer(i2_u6)) / 2.0;
     real3 := real(to_integer(o_u6)) / 2.0;
-	report "Ex22: " & str(real1) & " + " & str(real2) & " = " & str(real3);
+    report "Ex22: " & str(real1) & " + " & str(real2) & " = " & str(real3);
 
     
     -- Multiplication with Decimals
@@ -198,8 +198,8 @@ begin
     real3 := real(to_integer(o_s8))  / 4.0;
     report "Ex24: " & str(real1) & " * " & str(real2) & " = " & str(real3);
 
-	wait for 1 ns;
+    wait for 1 ns;
     finish;
-	end process;
+    end process;
     
 end test;
