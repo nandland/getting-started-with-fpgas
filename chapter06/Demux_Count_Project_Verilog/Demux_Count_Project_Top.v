@@ -14,12 +14,12 @@ module Demux_Count_Project_Top
   output o_LED_3,
   output o_LED_4);
 
-  // Equilalent to 2^22 - 1, which is what the LFSR counted up to
+  // Equivalent to 2^22 - 1, which is what the LFSR counted up to
   localparam COUNT_LIMIT = 4194303;
 
   wire w_Counter_Toggle;
 
-  Count_And_Toggle #(.COUNT_LIMIT(4194303)) Toggle_Counter
+  Count_And_Toggle #(.COUNT_LIMIT(COUNT_LIMIT)) Toggle_Counter
    (.i_Clk(i_Clk),
     .i_Enable(1'b1),
     .o_Toggle(w_Counter_Toggle));

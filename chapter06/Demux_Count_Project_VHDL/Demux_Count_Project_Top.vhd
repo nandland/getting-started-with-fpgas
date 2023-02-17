@@ -21,7 +21,7 @@ end entity Demux_LFSR_Project_Top;
 
 architecture RTL of Demux_LFSR_Project_Top is
     
-  -- Equilalent to 2^22 - 1, which is what the LFSR counted up to
+  -- Equivalent to 2^22 - 1, which is what the LFSR counted up to
   constant COUNT_LIMIT : integer := 4194303;
 
   signal w_Counter_Toggle : std_logic;
