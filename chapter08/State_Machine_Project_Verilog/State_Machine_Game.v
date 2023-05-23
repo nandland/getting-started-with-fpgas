@@ -208,6 +208,6 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
   LFSR_22 LFSR_Inst
    (.i_Clk(i_Clk),
     .o_LFSR_Data(w_LFSR_Data),
-    .o_LFSR_Done());
+    .o_LFSR_Done()); // leave unconnected
 
 endmodule
