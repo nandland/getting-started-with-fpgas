@@ -129,8 +129,8 @@ module State_Machine_Game # (parameter CLKS_PER_SEC = 25000000,
 
   end
 
-  // Register in the LFSR to r_Pattern when game starts. 
-  // Each 2-bits of LFSR is one value for r_Pattern 2D Array.
+  // Register in the LFSR to r_Pattern when game starts
+  // Each 2-bits of LFSR is one value for r_Pattern 2D Array
   always @(posedge i_Clk)
   begin
     if (r_SM_Main == START)

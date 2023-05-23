@@ -128,8 +128,8 @@ begin
 
   w_Index_SLV <= std_logic_vector(to_unsigned(r_Index, w_Index_SLV'length));
 
-  -- Register in the LFSR to r_Pattern when game starts. 
-  -- Each 2-bits of LFSR is one value for r_Pattern 2D Array.
+  -- Register in the LFSR to r_Pattern when game starts
+  -- Each 2-bits of LFSR is one value for r_Pattern 2D Array
   process (i_Clk) is
   begin
     if rising_edge(i_Clk) then
