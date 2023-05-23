@@ -56,7 +56,7 @@ begin
     
     -- Unsigned + Unsigned = Unsigned (Rule #1 Fix)
     i1_u4 := "1001"; -- dec 9
-    i2_u4 := "1101"; -- dec 11
+    i2_u4 := "1011"; -- dec 11
     i1_u5 := resize(i1_u4, i1_u5'length);
     i2_u5 := resize(i2_u4, i2_u5'length);
     o_u5  := i1_u5 + i2_u5;
@@ -64,7 +64,7 @@ begin
     
     -- Signed + Signed = Signed (Rule #1 Fix)
     i1_s4 := "1001"; -- dec -7
-    i2_s4 := "1010"; -- dec -5
+    i2_s4 := "1011"; -- dec -5
     i1_s5 := resize(i1_s4, i1_s5'length);
     i2_s5 := resize(i2_s4, i2_s5'length);
     o_s5  := i1_s5 + i2_s5;
