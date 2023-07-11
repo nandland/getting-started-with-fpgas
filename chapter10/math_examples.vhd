@@ -90,13 +90,13 @@ begin
     --i1_u4 := "1001"; -- dec 9
     --i2_u4 := "1011"; -- dec 11
     --o_u4  := i1_u4 * i2_u4;
-    --report "Ex07: " & str(i1_u4) & " * " & str(i2_u4) & " = " & str(o_u8);
-    
+    --report "Ex07: " & str(i1_u4) & " * " & str(i2_u4) & " = " & str(o_u4);
+
     -- Signed * Signed = Signed
     --i1_s4 := "1000"; -- dec -8
     --i2_s4 := "0111"; -- dec 7
-    --o_s8  := i1_s4 * i2_s4;
-    --report "Ex08: " & str(i1_s4) & " * " & str(i2_s4) & " = " & str(o_s8);
+    --o_s4  := i1_s4 * i2_s4;
+    --report "Ex08: " & str(i1_s4) & " * " & str(i2_s4) & " = " & str(o_s4);
 
     -- Unsigned * Unsigned = Unsigned
     i1_u4 := "1001"; -- dec 9
