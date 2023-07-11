@@ -167,7 +167,7 @@ begin
     i1_u4 := "0011";
     i2_u4 := "0011";
     i1_u6 := resize(i1_u4, i1_u6'length); -- expand for adding
-    i2_u6 := resize(i2_u5, i2_u6'length); -- expand for adding
+    i2_u6 := resize(i2_u4, i2_u6'length); -- expand for adding
     i2_u6 := shift_left(i2_u6, 1);  -- Convert 4.0 to 4.1
     o_u6  := i1_u6 + i2_u6;
     
