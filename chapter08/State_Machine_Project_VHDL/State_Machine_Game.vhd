@@ -100,7 +100,7 @@ begin
               else
                 r_Index <= r_Index + 1;
               end if;
-          end if;
+            end if;
 
           -- Used to increment Score Counter
           when INCR_SCORE =>
