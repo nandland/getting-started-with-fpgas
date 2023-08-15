@@ -1,4 +1,4 @@
-# About
+## About
 
 This repository contains supporting code for the book Getting Started with FPGAs by Russell Merrick. All Verilog and VHDL code used in the book can be found in this repository. 
 
@@ -28,7 +28,11 @@ Introduces FPGAs and talks about their strengths and weaknesses. Being an engine
 
 ### Chapter 2: Setting Up Your Hardware and Tools
 
-Gets you set up with the Lattice iCE40 series of FPGAs. You’ll download and install the FPGA tools and learn how to run them to program your FPGA. Chapter 3: Boolean Algebra and the Look-Up Table Explores one of the two most fundamental FPGA components: the look-up table (LUT). You’ll learn how LUTs perform Boolean algebra and take the place of dedicated logic gates.
+Gets you set up with the Lattice iCE40 series of FPGAs. You’ll download and install the FPGA tools and learn how to run them to program your FPGA. 
+
+### Chapter 3: Boolean Algebra and the Look-Up Table
+
+Explores one of the two most fundamental FPGA components: the look-up table (LUT). You’ll learn how LUTs perform Boolean algebra and take the place of dedicated logic gates.
 
 ### Chapter 4: Storing State with the Flip-Flop
 
