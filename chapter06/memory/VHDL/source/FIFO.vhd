@@ -82,7 +82,7 @@ begin
   -- Main process to control address and counters for FIFO
   process (i_Clk, i_Rst_L) is
   begin
-    if not i_Rst_L then
+    if i_Rst_L='0' then
       r_Wr_Addr <= 0;
       r_Rd_Addr <= 0;
       r_Count   <= 0;
