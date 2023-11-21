@@ -94,7 +94,7 @@ begin
     -- Test: Fill FIFO with incrementing pattern, then read it back.
     reset_fifo(r_Rst_L, r_Wr_DV, r_Rd_En);
     r_Wr_Data <= X"30";
-    for ii in 0 to DEPTH-1 loop
+    for i in 0 to DEPTH-1 loop
       r_Wr_DV <= '1';
       wait until rising_edge(r_Clk);
       r_Wr_DV <= '0';
